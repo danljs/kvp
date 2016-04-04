@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="app.css" rel="stylesheet" type="text/css" media="all" >
+<title></title>
+</head>
+
+<body>
+	<div class="all">
+		<div class="row header">
+			<div class="label">Key/Value Pair</div>
+			<div class="row">
+				<div class="left-area"><input id="kv-input" type="text"/></div>
+				<div class="right-area"><button id="add-button">Add</button></div>
+			</div>
+			<div class="row" id="message"></div>
+		</div>
+		<div class="row body">
+			<div class="row label">Key/Value Pair List</div>
+			<div class="row">
+				<div class="left-area">
+					<select id="kv-list" size="10"></select>
+					<textarea readOnly id="kv-xml"></textarea>
+				</div>
+				<div class="right-area">
+					<div class="row"><button id="order-value-button">OrderByValue</button></div>
+					<div class="row"><button id="order-key-button">OrderByKey</button></div>
+					<div class="row"><button id="delete-button">Delete</button></div>
+					<div class="row"><button id="show-xml">ShowXML</button></div>
+					<div class="row"><button id="show-list">ShowList</button></div>
+					<div class="row"><button id="load-json">LoadData</button></div>
+					<div class="row"><button id="save-json">SaveData</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- <script src="app.js"></script> -->
+<script src="app.v1.js"></script>
+</html>

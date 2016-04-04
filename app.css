@@ -1,0 +1,143 @@
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+body{
+	padding-top: 20px;
+}
+button{
+	display: inline-block;
+    height: 25px;
+    padding: 0 30px;
+    color: #555;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: #F48024;
+    color: #fff;
+}
+button:hover{
+	opacity: 0.8;
+}
+.all{
+	width: 600px;
+	height: 330px;
+    margin: auto; 
+    background-color: #E7E9D8;
+    border-style: outset;
+    padding:10px 0px 0px 20px;
+}
+.header{
+	position: relative;
+	width: 100%;
+}
+
+.header .left-area{
+	float: left;;
+}
+.header .right-area{
+	float: left;
+}
+
+#kv-input{
+	width: 396px;
+	height: 19px;
+	margin-bottom: 10px;
+}
+#kv-input:focus {
+    background-color: #f293eb;
+}
+
+#message{
+	color: red;
+	height: 25px;
+}
+
+.body{
+	margin-top: 10px;/
+	width: 100%;
+}
+.body .left-area{
+	float: left;
+}
+.body .right-area{
+	float: left;
+}
+
+#kv-list{
+	width: 400px;
+	height: 200px;
+	margin-bottom: 10px;
+}
+
+#kv-xml{
+	width: 394px;
+	height: 194px;
+	display: none;
+	margin-bottom: 10px;
+	resize: none;
+}
+#show-list{
+	display: none;
+}
+@media (max-width: 600px) {
+	body{
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+	}
+	.all{
+		width: 100%;
+		margin: auto; 
+		height: auto;
+	}
+	.header .left-area{
+		float: initial;
+	}
+	#kv-input{
+		width: 89%;
+	}
+	.header .right-area{
+		float: initial;
+		width: 90%;
+	}
+	.body{
+		margin-top: 30px;
+	}
+	.body .left-area{
+		float: initial;
+		width: 90%;
+	}
+	.body .right-area{
+		float: initial;
+		width: 90%;
+	}
+	.right-area button{
+		width: 100%;
+	}
+	#kv-list{
+		width: 100%;
+	}
+	#kv-xml{
+		width: 98.5%;
+	}
+	button{
+	    margin-left: 0px;
+	    background-color: #5F5F5F;
+	    color: #fff;
+	}
+	#show-list,#show-xml{
+		background-color: #F48024;
+	}
+}
