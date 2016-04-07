@@ -25,14 +25,14 @@ M.prototype.remove = function(){
     this.selected = -1
 }
 M.prototype.sort_key = function(){
-	this.kv_array.sort((a, b)=>{
+	this.kv_array.sort(function(a, b){
 	    var aa = a.key, bb = b.key;
 	    return aa < bb ? -1 : (aa > bb ? 1 : 0);
 	});
 	return this.kv_array;
 }
 M.prototype.sort_value = function(){
-	this.kv_array.sort((a, b)=>{
+	this.kv_array.sort(function(a, b){
 	    var aa = a.value, bb = b.value;
 	    return aa < bb ? -1 : (aa > bb ? 1 : 0);
 	});
@@ -43,7 +43,7 @@ M.prototype.xml = function(){
 	kv_xml += "<html>\n<body>\n"
 
 	kv_xml += "<select id='kv-list' size='10'>\n"
-	this.kv_array.map((c,i)=>{
+	this.kv_array.map(function(c,i){
 		kv_xml += "<option value='" + c.key + "'" ;
     	kv_xml += this.selected === i ? " selected":"" ;
         kv_xml += ">" + c.key+ '=' + c.value + "</option>\n";
@@ -73,10 +73,10 @@ V.prototype.remove_kv = function () {
 V.prototype.reload_kv = function (arr) {
 	var kv_list = $("kv-list") ;
 	while (kv_list.options.length > 0) {kv_list.remove(0)}
-	arr.map(c=>{kv_list.options.add(new Option(c.key + '=' + c.value,c.key))}) ;
+	arr.map(function(c){kv_list.options.add(new Option(c.key + '=' + c.value,c.key))}) ;
 }
 V.prototype.addListener = function(listeners){
-	listeners.map(c=>{
+	listeners.map(function(c){
 		$(c.id).addEventListener(c.event,c.listener);
 	})
 }
@@ -111,8 +111,8 @@ var C = function(model, view){
     	{id:"show-xml" ,event:"click", listener:on_click_show_xml},
     	{id:"show-list" ,event:"click", listener:on_click_show_list},
     	{id:"kv-list" ,event:"change", listener:on_click_kv_list},
-    	{id:"load-json" ,event:"click", listener:on_click_load_json},
-    	{id:"save-json" ,event:"click", listener:on_click_save_json}
+    	{id:"load-json" ,event:"click", listener:me.on_click_load_json.bind(me)},
+    	{id:"save-json" ,event:"click", listener:me.on_click_save_json.bind(me)}
     ]);
 
     function on_keypress(e){
@@ -153,52 +153,70 @@ var C = function(model, view){
 			_view.set_error();
 		}
 	}
-	add_kv=function(k,v){
+	this.add_kv=function(k,v){
 		_view.add(k,v);
 		_model.add(k,v);
 	}
+	this.get_model=function(){
+		this.check();
+		return _model;	
+	} 
 
-	function on_click_load_json(e){
-		var x = document.createElement("INPUT");
-	    x.setAttribute("type", "file");
-	    document.body.appendChild(x);
-	    x.style = "visibility:hidden";
-	    x.addEventListener('click',function(e){})
-	    x.addEventListener('change',function(e){
-	    	var file = e.target.files[0];
-			if (!file) {return;}
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var contents = JSON.parse(e.target.result);
-				contents.map((e,i)=>{
-					add_kv(e.key,e.value)
-				})
-			};
-			reader.readAsText(file);
-	    })
-	    x.click();
-	    document.body.removeChild(x);
-	}
-	function on_click_save_json(e){
-	    var x = document.createElement("a");    
-	    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(_model.data());
-	    x.style = "visibility:hidden";
-	    x.download = "kv.json";
-	    document.body.appendChild(x);
-	    x.click();
-	    document.body.removeChild(x);
-	}
+	this.model=_model;
 }
 C.prototype.check=function(new_kv){
 	var patt0 = /\w+\s*=\s*\w+/g;
 	var patt1 = /(^[a-zA-Z0-9\s*]*$)/g;
 	return patt0.test(new_kv) && patt1.test(new_kv.replace('=',''))
 }
+C.prototype.on_click_load_json=function(e){
+	var me = this
 
-//================================================================
-function bootstrapper(){
- 	var model = new M();
- 	var view = new V(model);
- 	var controller = new C(model,view);
+	new Promise(function(resolve, reject){
+		var x = document.createElement("INPUT");
+	    x.setAttribute("type", "file");
+	    document.body.appendChild(x);
+	    x.style = "visibility:hidden";
+	    x.addEventListener('change',resolve);
+	    x.click();
+	    document.body.removeChild(x);
+	})
+	.then(
+		function (e){
+			return new Promise(function(resolve, reject){
+		    	var file = e.target.files[0];
+				if (!file) {return;}
+				var reader = new FileReader();
+				reader.onload = resolve;
+				reader.readAsText(file);
+			})
+    	},
+    	function(){
+			console.log('Something wrong...');
+		}
+	)
+	.then(
+		function (e){
+			JSON.parse(e.target.result).map(function(e,i){
+				me.add_kv(e.key,e.value)
+			});
+		},
+		function(){
+			console.log('Something wrong...');
+		}
+	)
 }
-window.onload = bootstrapper;
+C.prototype.on_click_save_json = function(e){
+    var x = document.createElement("a");    
+    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.model.data());
+    x.style = "visibility:hidden";
+    x.download = "kv.json";
+    document.body.appendChild(x);
+    x.click();
+    document.body.removeChild(x);
+}
+//================================================================
+window.onload = function(){
+ 	var model = new M();
+ 	var controller = new C(model,new V(model));
+};
