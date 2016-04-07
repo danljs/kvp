@@ -97,9 +97,9 @@ V.prototype.set_xml=function(kv_xml){
 	$("kv-xml").value=kv_xml;
 }
 //================================================================
-var C = function(model, view){
-	var _model = model;
-    var _view = view;
+var C = function(){
+	var _model = new M();
+    var _view = new V(_model);
 	var me = this;
 
     _view.addListener([
@@ -148,21 +148,19 @@ var C = function(model, view){
 			kv = kv.split('=');
 			kv[0] = kv[0].trim();
 			kv[1] = kv[1].trim();
-			add_kv(kv[0], kv[1])
+			me.add_kv(kv[0], kv[1])
 		}else{
 			_view.set_error();
 		}
 	}
+
 	this.add_kv=function(k,v){
 		_view.add(k,v);
 		_model.add(k,v);
 	}
 	this.get_model=function(){
-		this.check();
 		return _model;	
 	} 
-
-	this.model=_model;
 }
 C.prototype.check=function(new_kv){
 	var patt0 = /\w+\s*=\s*\w+/g;
@@ -170,8 +168,7 @@ C.prototype.check=function(new_kv){
 	return patt0.test(new_kv) && patt1.test(new_kv.replace('=',''))
 }
 C.prototype.on_click_load_json=function(e){
-	var me = this
-
+	var me = this;
 	new Promise(function(resolve, reject){
 		var x = document.createElement("INPUT");
 	    x.setAttribute("type", "file");
@@ -208,7 +205,7 @@ C.prototype.on_click_load_json=function(e){
 }
 C.prototype.on_click_save_json = function(e){
     var x = document.createElement("a");    
-    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.model.data());
+    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.get_model().data());
     x.style = "visibility:hidden";
     x.download = "kv.json";
     document.body.appendChild(x);
@@ -216,7 +213,4 @@ C.prototype.on_click_save_json = function(e){
     document.body.removeChild(x);
 }
 //================================================================
-window.onload = function(){
- 	var model = new M();
- 	var controller = new C(model,new V(model));
-};
+window.onload = function(){new C();};
