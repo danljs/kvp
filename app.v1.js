@@ -100,7 +100,6 @@ V.prototype.set_xml=function(kv_xml){
 var C = function(){
 	var _model = new M();
     var _view = new V(_model);
-	var me = this;
 
     _view.addListener([
     	{id:"kv-input", event:"keypress", listener:on_keypress},
@@ -111,8 +110,8 @@ var C = function(){
     	{id:"show-xml" ,event:"click", listener:on_click_show_xml},
     	{id:"show-list" ,event:"click", listener:on_click_show_list},
     	{id:"kv-list" ,event:"change", listener:on_click_kv_list},
-    	{id:"load-json" ,event:"click", listener:me.on_click_load_json.bind(me)},
-    	{id:"save-json" ,event:"click", listener:me.on_click_save_json.bind(me)}
+    	{id:"load-json" ,event:"click", listener:on_click_load_json},
+    	{id:"save-json" ,event:"click", listener:on_click_save_json}
     ]);
 
     function on_keypress(e){
@@ -144,73 +143,70 @@ var C = function(){
 		_model.set_selected(e.srcElement.selectedIndex)
 	}
 	function load_kv(kv){
-		if(me.check(kv)){
+		if(check(kv)){
 			kv = kv.split('=');
 			kv[0] = kv[0].trim();
 			kv[1] = kv[1].trim();
-			me.add_kv(kv[0], kv[1])
+			add_kv(kv[0], kv[1])
 		}else{
 			_view.set_error();
 		}
 	}
 
-	this.add_kv=function(k,v){
+	function add_kv(k,v){
 		_view.add(k,v);
 		_model.add(k,v);
 	}
-	this.get_model=function(){
-		return _model;	
-	} 
-}
-C.prototype.check=function(new_kv){
-	var patt0 = /\w+\s*=\s*\w+/g;
-	var patt1 = /(^[a-zA-Z0-9\s*]*$)/g;
-	return patt0.test(new_kv) && patt1.test(new_kv.replace('=',''))
-}
-C.prototype.on_click_load_json=function(e){
-	var me = this;
-	new Promise(function(resolve, reject){
-		var x = document.createElement("INPUT");
-	    x.setAttribute("type", "file");
-	    document.body.appendChild(x);
+
+	function check(new_kv){
+		var patt0 = /\w+\s*=\s*\w+/g;
+		var patt1 = /(^[a-zA-Z0-9\s*]*$)/g;
+		return patt0.test(new_kv) && patt1.test(new_kv.replace('=',''))
+	}
+	function on_click_load_json(e){
+		new Promise(function(resolve, reject){
+			var x = document.createElement("INPUT");
+		    x.setAttribute("type", "file");
+		    document.body.appendChild(x);
+		    x.style = "visibility:hidden";
+		    x.addEventListener('change',resolve);
+		    x.click();
+		    document.body.removeChild(x);
+		})
+		.then(
+			function (e){
+				return new Promise(function(resolve, reject){
+			    	var file = e.target.files[0];
+					if (!file) {return;}
+					var reader = new FileReader();
+					reader.onload = resolve;
+					reader.readAsText(file);
+				})
+	    	},
+	    	function(){
+				console.log('Something wrong...');
+			}
+		)
+		.then(
+			function (e){
+				JSON.parse(e.target.result).map(function(e,i){
+					add_kv(e.key,e.value)
+				});
+			},
+			function(){
+				console.log('Something wrong...');
+			}
+		)
+	}
+	function on_click_save_json(e){
+	    var x = document.createElement("a");    
+	    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(_model.data());
 	    x.style = "visibility:hidden";
-	    x.addEventListener('change',resolve);
+	    x.download = "kv.json";
+	    document.body.appendChild(x);
 	    x.click();
 	    document.body.removeChild(x);
-	})
-	.then(
-		function (e){
-			return new Promise(function(resolve, reject){
-		    	var file = e.target.files[0];
-				if (!file) {return;}
-				var reader = new FileReader();
-				reader.onload = resolve;
-				reader.readAsText(file);
-			})
-    	},
-    	function(){
-			console.log('Something wrong...');
-		}
-	)
-	.then(
-		function (e){
-			JSON.parse(e.target.result).map(function(e,i){
-				me.add_kv(e.key,e.value)
-			});
-		},
-		function(){
-			console.log('Something wrong...');
-		}
-	)
-}
-C.prototype.on_click_save_json = function(e){
-    var x = document.createElement("a");    
-    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.get_model().data());
-    x.style = "visibility:hidden";
-    x.download = "kv.json";
-    document.body.appendChild(x);
-    x.click();
-    document.body.removeChild(x);
+	}
 }
 //================================================================
 window.onload = function(){new C();};
