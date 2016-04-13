@@ -138,7 +138,9 @@ function $(id){return document.getElementById(id)}
 	function reload_kv(arr) {
 		var kv_list = $('kv-list');
 		while (kv_list.options.length > 0){kv_list.remove(0)};
-		arr.map(function(c){kv_list.options.add(new Option(c.key + '=' + c.value, c.key))});
+		arr.map(function(c){
+			kv_list.options.add(new Option(c.key + '=' + c.value, c.key))
+		});
 	}
 
 	function add(key,value) {
