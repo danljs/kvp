@@ -64,7 +64,7 @@ function $(id){return document.getElementById(id)}
 		model.remove();
 		var kv_list = $('kv-list');
 	    for(var i = kv_list.options.length - 1; i >= 0; i--) {
-	        kv_list.options[i].selected?kv_list.remove(i) : '';
+	        kv_list.options[i].selected ? kv_list.remove(i) : '';
 	    };
 	});
 
@@ -95,7 +95,7 @@ function $(id){return document.getElementById(id)}
 			function (e){
 				return new Promise(function(resolve, reject){
 			    	var file = e.target.files[0];
-					if (!file) {return;}
+					if(!file){return;}
 					var reader = new FileReader();
 					reader.onload = resolve;
 					reader.readAsText(file);
@@ -107,9 +107,9 @@ function $(id){return document.getElementById(id)}
 		)
 		.then(
 			function (e){
-				JSON.parse(e.target.result).map(function(e,i){
-					add(e.key,e.value);
-					model.add(e.key,e.value);
+				JSON.parse(e.target.result).map(function(e, i){
+					add(e.key, e.value);
+					model.add(e.key, e.value);
 				});
 			},
 			function(){
@@ -158,7 +158,7 @@ function $(id){return document.getElementById(id)}
 			add(kv[0], kv[1]);
 			model.add(kv[0], kv[1]);
 		}else{
-			$('message').innerHTML='Invalid key/value pair';
+			$('message').innerHTML = 'Invalid key/value pair';
 		}
 	}
 })();
