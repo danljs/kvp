@@ -1,0 +1,27 @@
+.login {
+  position: relative;
+  padding: 45px 45px 15px 45px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 0;
+}
+.login:after {
+  position: absolute;
+  top: 15px;
+  left: 45px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  content: "Booking";
+}
+@media all and (max-width:400px) {
+  .login button {
+    width: 100%;
+    text-align: left;
+    text-indent: -9999px;
+    background-repeat: no-repeat;
+  }
+}

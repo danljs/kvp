@@ -1,0 +1,20 @@
+$xxs: "all and (max-width:420px)";
+$xs: "all and (min-width:421px) and (max-width:767px)";
+@media #{$xxs} {
+    body.modal-open {
+        position: fixed;
+    }
+}
+#bookingContainer {
+  #bookingCalendar{
+    .fc-view-container{
+      .fc-widget-header{
+        @media #{$xxs} {
+          table{
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}

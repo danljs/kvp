@@ -1,0 +1,32 @@
+@xxs: ~"all and (max-width:400px)"; 
+@xs: ~"all and (max-width:767px)";
+@s: ~"all and (max-width:991px) and (min-width:768px)";
+@m: ~"all and (max-width:1199px) and (min-width:992px)";
+@l: ~"all and (min-width:1200px)";
+.login{
+	position: relative;
+    padding: 45px 45px 15px 45px;
+    margin: 0 -15px 15px;
+    border-color: #e5e5e5 #eee #eee;
+    border-style: solid;
+    border-width: 1px 0;
+	&:after{
+		position: absolute;
+	    top: 15px;
+	    left: 45px;
+	    font-size: 12px;
+	    font-weight: 700;
+	    color: #959595;
+	    text-transform: uppercase;
+	    letter-spacing: 1px;
+	    content: "Booking";
+	}
+	@media @xxs{
+		button{
+			width: 100%;
+			text-align: left;
+			text-indent: -9999px;
+			background-repeat: no-repeat;
+		}
+	}
+}
