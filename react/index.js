@@ -5,7 +5,7 @@ import Header from './header'
 import Body from './body'
 
 render(
-	<div>
+	<div className="all">
 	<Header/>
 	<hr/>
 	<Body/>

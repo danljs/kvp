@@ -3,30 +3,89 @@
 @s: ~"all and (max-width:991px) and (min-width:768px)";
 @m: ~"all and (max-width:1199px) and (min-width:992px)";
 @l: ~"all and (min-width:1200px)";
-.login{
-	position: relative;
-    padding: 45px 45px 15px 45px;
-    margin: 0 -15px 15px;
-    border-color: #e5e5e5 #eee #eee;
-    border-style: solid;
-    border-width: 1px 0;
-	&:after{
-		position: absolute;
-	    top: 15px;
-	    left: 45px;
-	    font-size: 12px;
-	    font-weight: 700;
-	    color: #959595;
-	    text-transform: uppercase;
-	    letter-spacing: 1px;
-	    content: "Booking";
-	}
-	@media @xxs{
-		button{
-			width: 100%;
-			text-align: left;
-			text-indent: -9999px;
-			background-repeat: no-repeat;
-		}
-	}
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+body{
+  padding-top: 20px;
+}
+button{
+  height: 25px;
+  padding: 0 30px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  margin: 0px 0px 10px 10px;
+  background-color: #F48024;
+  color: #fff;
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.all{
+  width: 600px;
+  height: 330px;
+  margin: auto; 
+  background-color: #E7E9D8;
+  border-style: outset;
+  padding:10px 0px 0px 20px;
+  .header{
+    position: relative;
+    width: 100%;
+    .left-area{
+      float: left;;
+    }
+    .right-area{
+      float: left;
+    }
+  }
+  .body{
+    margin-top: 10px;
+    width: 100%;
+    .left-area{
+      float: left;
+    }
+    .right-area{
+      float: left;
+    }
+  }
+}
+
+#kv-input{
+  width: 396px;
+  height: 19px;
+  margin-bottom: 10px;
+}
+#kv-input:focus {
+    background-color: #f293eb;
+}
+
+#message{
+  color: red;
+  height: 25px;
+}
+
+#kv-list{
+  width: 400px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+#kv-xml{
+  width: 394px;
+  height: 194px;
+  display: none;
+  margin-bottom: 10px;
+  resize: none;
+}
+#show-list{
+  display: none;
 }

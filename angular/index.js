@@ -24,12 +24,12 @@ app.factory('model', function(){
 
 app.directive('headerPanel', function(){
 	return {
-        template : "<h1>headerPanel</h1>"
+		templateUrl: 'header.html'
     };
 });
 
 app.directive('bodyPanel', function(){
 	return {
-        template : "<h2>bodyPanel</h2>"
+		templateUrl: 'body.html'
     };
 });

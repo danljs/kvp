@@ -36,11 +36,88 @@ var body = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        null,
+        { className: 'row body' },
         _react2['default'].createElement(
-          'h1',
-          null,
-          'bodyPanel'
+          'div',
+          { className: 'row label' },
+          'Key/Value Pair List'
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'row' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'left-area' },
+            _react2['default'].createElement('select', { id: 'kv-list', size: '10' }),
+            _react2['default'].createElement('textarea', { readOnly: true, id: 'kv-xml' })
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'right-area' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'order-value-button' },
+                'OrderByValue'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'order-key-button' },
+                'OrderByKey'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'delete-button' },
+                'Delete'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'show-xml' },
+                'ShowXML'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'show-list' },
+                'ShowList'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'load-json' },
+                'LoadData'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement(
+                'button',
+                { id: 'save-json' },
+                'SaveData'
+              )
+            )
+          )
         )
       );
     }
@@ -90,12 +167,31 @@ var header = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        null,
+        { className: 'row header' },
         _react2['default'].createElement(
-          'h1',
-          null,
-          'headerPanel'
-        )
+          'div',
+          { className: 'label' },
+          'Key/Value Pair'
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'row' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'left-area' },
+            _react2['default'].createElement('input', { id: 'kv-input', type: 'text' })
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'right-area' },
+            _react2['default'].createElement(
+              'button',
+              { id: 'add-button' },
+              'Add'
+            )
+          )
+        ),
+        _react2['default'].createElement('div', { className: 'row', id: 'message' })
       );
     }
   }]);
@@ -127,7 +223,7 @@ var _body2 = _interopRequireDefault(_body);
 
 (0, _reactDom.render)(_react2['default'].createElement(
 	'div',
-	null,
+	{ className: 'all' },
 	_react2['default'].createElement(_header2['default'], null),
 	_react2['default'].createElement('hr', null),
 	_react2['default'].createElement(_body2['default'], null)
