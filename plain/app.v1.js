@@ -80,7 +80,11 @@ function $(id){return document.getElementById(id)}
 	$('kv-list').addEventListener('change', function(e){
 		model.set_selected(e.srcElement.selectedIndex);
 	});
-
+	var new_promise = function(func){
+		return new Promise(function(resolve, reject){
+			func.call(this,resolve,reject)
+		});
+	}
 	$('load-json').addEventListener('click', function(e){
 		new Promise(function(resolve, reject){
 			var x = document.createElement('INPUT');

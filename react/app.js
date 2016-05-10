@@ -157,6 +157,11 @@ var header = (function (_React$Component) {
     _classCallCheck(this, header);
 
     _get(Object.getPrototypeOf(header.prototype), 'constructor', this).call(this, props);
+    this.state = {
+      message: '',
+      kv_input: ''
+
+    };
   }
 
   _createClass(header, [{
@@ -165,6 +170,7 @@ var header = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var me = this;
       return _react2['default'].createElement(
         'div',
         { className: 'row header' },
@@ -179,14 +185,32 @@ var header = (function (_React$Component) {
           _react2['default'].createElement(
             'div',
             { className: 'left-area' },
-            _react2['default'].createElement('input', { id: 'kv-input', type: 'text' })
+            _react2['default'].createElement('input', { id: 'kv-input', type: 'text', ref: 'kv_input',
+              onKeyPress: function (e) {}
+            })
           ),
           _react2['default'].createElement(
             'div',
             { className: 'right-area' },
             _react2['default'].createElement(
               'button',
-              { id: 'add-button' },
+              { id: 'add-button',
+                onClick: function (e) {
+                  me.setState({ message: '' });
+                  var kv = $('kv-input').value;
+                  var patt0 = /\w+\s*=\s*\w+/g;
+                  var patt1 = /(^[a-zA-Z0-9\s*]*$)/g;
+                  if (patt0.test(kv) && patt1.test(kv.replace('=', ''))) {
+                    kv = kv.split('=');
+                    kv[0] = kv[0].trim();
+                    kv[1] = kv[1].trim();
+                    add(kv[0], kv[1]);
+                    model.add(kv[0], kv[1]);
+                  } else {
+                    $('message').innerHTML = 'Invalid key/value pair';
+                  }
+                }
+              },
               'Add'
             )
           )
