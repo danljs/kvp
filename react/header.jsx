@@ -31,22 +31,21 @@ class header extends React.Component{
           <button id='add-button'
             onClick={function(e){
               me.setState({message : ''})
-              var kv = $('kv-input').value;
+              var kv = e.target.value;
               var patt0 = /\w+\s*=\s*\w+/g;
               var patt1 = /(^[a-zA-Z0-9\s*]*$)/g;
               if(patt0.test(kv) && patt1.test(kv.replace('=', ''))){
                 kv = kv.split('=');
                 kv[0] = kv[0].trim();
                 kv[1] = kv[1].trim();
-                add(kv[0], kv[1]);
-                model.add(kv[0], kv[1]);
+                me.props.add(kv[0], kv[1]);
               }else{
-                $('message').innerHTML = 'Invalid key/value pair';
+                me.setState({message : 'Invalid key/value pair'});
               }
             }}
           >Add</button></div>
         </div>
-        <div className='row' id='message'></div>
+        <div className='row' id='message'>{me.state.message}</div>
       </div>
     )
   }

@@ -3,6 +3,10 @@ import React from 'react';
 class body extends React.Component{
   constructor(props) {
     super(props)
+    this.state = {
+      kv_array : [], 
+      selected : -1
+    }
   }
 
   componentDidMount(){
