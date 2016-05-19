@@ -23,13 +23,44 @@ app.controller('HeaderCtrl', ['$scope', 'model', function($scope, model){
 }]);
 
 app.controller('BodyCtrl', ['$scope', 'model', function($scope, model){
+	$scope.selected = -1;
+	$scope.toggle_list = true;
+	$scope.kv_xml = '';
+
 	$scope.$watchCollection(model.getdata, function(new_value,old_value){
 		$scope.kv_array = new_value;
 	});
+
+	$scope.delete = function(){
+		model.remove();
+	};
+	$scope.change_selected = function(){
+		model.set_selected($scope.selected);
+	};
+	$scope.order_value = function(){
+		model.sort_value();
+	};
+	$scope.order_key = function(){
+		model.sort_key();
+	};
+	$scope.show_xml = function(){
+		$scope.kv_xml = model.xml();
+		$scope.toggle_list = false ;
+	};
+	$scope.show_list = function(){
+		$scope.toggle_list = true ;
+	};
+	$scope.load_json = function(){
+
+	};
+	$scope.save_json = function(){
+
+	};
+
 }]);
 
 app.factory('model', [function(){
-	var kv_array = [], selected = -1;
+	var kv_array = [], selected = [];
 	return{
 		add : function(key, value){
 			kv_array.push({key : key,value : value});
@@ -38,8 +69,9 @@ app.factory('model', [function(){
 			selected = index;
 		},
 		remove : function(){
-		    selected !== -1 ? kv_array.splice(selected, 1) : '';
-		    selected = -1;
+			kv_array = kv_array.filter(function(c,i){
+				return selected.indexOf(i+'') < 0;
+			});
 		},
 		sort_key : function(){
 			kv_array.sort(function(a, b){
