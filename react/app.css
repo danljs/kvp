@@ -51,30 +51,30 @@ button:hover {
 .all .body .right-area {
   float: left;
 }
-#kv-input {
+.kv-input {
   width: 396px;
   height: 19px;
   margin-bottom: 10px;
 }
-#kv-input:focus {
+.kv-input:focus {
   background-color: #f293eb;
 }
-#message {
+.message {
   color: red;
   height: 25px;
 }
-#kv-list {
+.kv-list {
   width: 400px;
   height: 200px;
   margin-bottom: 10px;
 }
-#kv-xml {
+.kv-xml {
   width: 394px;
   height: 194px;
   display: none;
   margin-bottom: 10px;
   resize: none;
 }
-#show-list {
+.show-list {
   display: none;
 }

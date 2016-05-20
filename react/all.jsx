@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Header from './header'
+import Body from './body'
 class all extends React.Component{
   constructor(props) {
     super(props)
@@ -14,8 +15,8 @@ class all extends React.Component{
   render(){
     var me = this;
     return (
-      <div>
-        <Header all={function(key, value){
+      <div className="all">
+        <Header add={function(key, value){
           me.setState({new_kv : {key : key,value : value}});
         }}/>
         <hr/>
