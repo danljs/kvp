@@ -96,7 +96,7 @@ var body = (function (_React$Component) {
     _get(Object.getPrototypeOf(body.prototype), 'constructor', this).call(this, props);
     this.state = {
       kv_array: [],
-      selected: -1
+      selected: []
     };
   }
 
@@ -128,7 +128,14 @@ var body = (function (_React$Component) {
             { className: 'left-area' },
             _react2['default'].createElement(
               'select',
-              { className: 'kv-list', multiple: true, size: '10' },
+              { className: 'kv-list', multiple: true, size: '10', onChange: function (e) {
+                  var options = e.target.options;
+                  var selected = [];
+                  for (var i = 0; i < options.length; i++) {
+                    options[i].selected ? selected.push(i) : '';
+                  }
+                  me.setState({ selected: selected });
+                } },
               me.state.kv_array.map(function (c, i) {
                 return _react2['default'].createElement(
                   'option',
@@ -147,7 +154,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'order-value-button' },
+                { className: 'order-value-button', onClick: function (e) {} },
                 'OrderByValue'
               )
             ),
@@ -156,7 +163,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'order-key-button' },
+                { className: 'order-key-button', onClick: function (e) {} },
                 'OrderByKey'
               )
             ),
@@ -165,7 +172,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'delete-button' },
+                { className: 'delete-button', onClick: function (e) {} },
                 'Delete'
               )
             ),
@@ -174,7 +181,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'show-xml' },
+                { className: 'show-xml', onClick: function (e) {} },
                 'ShowXML'
               )
             ),
@@ -183,7 +190,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'show-list' },
+                { className: 'show-list', onClick: function (e) {} },
                 'ShowList'
               )
             ),
@@ -192,7 +199,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'load-json' },
+                { className: 'load-json', onClick: function (e) {} },
                 'LoadData'
               )
             ),
@@ -201,7 +208,7 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'save-json' },
+                { className: 'save-json', onClick: function (e) {} },
                 'SaveData'
               )
             )
@@ -248,7 +255,6 @@ var header = (function (_React$Component) {
     this.state = {
       message: '',
       kv_input: ''
-
     };
   }
 
@@ -267,6 +273,7 @@ var header = (function (_React$Component) {
         kv[0] = kv[0].trim();
         kv[1] = kv[1].trim();
         this.props.add(kv[0], kv[1]);
+        this.refs.kv_input.value = '';
       } else {
         this.setState({ message: 'Invalid key/value pair' });
       }

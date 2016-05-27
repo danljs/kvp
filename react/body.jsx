@@ -1,11 +1,12 @@
 import React from 'react';
+import model form './model'
 
 class body extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
       kv_array : [], 
-      selected : -1
+      selected : []
     }
   }
 
@@ -21,7 +22,14 @@ class body extends React.Component{
         <div className='row label'>Key/Value Pair List</div>
         <div className='row'>
           <div className='left-area'>
-            <select className='kv-list' multiple size='10'>
+            <select className='kv-list' multiple={true} size='10' onChange={function(e){
+              var options = e.target.options
+              var selected = []
+              for(var i = 0 ; i < options.length ; i++){
+                options[i].selected ? selected.push(i) : ''
+              }
+              me.setState({selected: selected})
+            }}>
             {
               me.state.kv_array.map(function(c,i){
                 return <option key={i} value={i}>{c.key + '=' + c.value}</option>
@@ -31,13 +39,27 @@ class body extends React.Component{
             <textarea readOnly className='kv-xml'></textarea>
           </div>
           <div className='right-area'>
-            <div className='row'><button className='order-value-button'>OrderByValue</button></div>
-            <div className='row'><button className='order-key-button'>OrderByKey</button></div>
-            <div className='row'><button className='delete-button'>Delete</button></div>
-            <div className='row'><button className='show-xml'>ShowXML</button></div>
-            <div className='row'><button className='show-list'>ShowList</button></div>
-            <div className='row'><button className='load-json'>LoadData</button></div>
-            <div className='row'><button className='save-json'>SaveData</button></div>
+            <div className='row'><button className='order-value-button' onClick={function(e){
+
+            }}>OrderByValue</button></div>
+            <div className='row'><button className='order-key-button' onClick={function(e){
+
+            }}>OrderByKey</button></div>
+            <div className='row'><button className='delete-button' onClick={function(e){
+
+            }}>Delete</button></div>
+            <div className='row'><button className='show-xml' onClick={function(e){
+
+            }}>ShowXML</button></div>
+            <div className='row'><button className='show-list' onClick={function(e){
+
+            }}>ShowList</button></div>
+            <div className='row'><button className='load-json' onClick={function(e){
+
+            }}>LoadData</button></div>
+            <div className='row'><button className='save-json' onClick={function(e){
+
+            }}>SaveData</button></div>
           </div>
         </div>
       </div>

@@ -5,8 +5,7 @@ class header extends React.Component{
     super(props)
     this.state={
       message: '',
-      kv_input: '',
-
+      kv_input: ''
     }
   }
 
@@ -23,6 +22,7 @@ class header extends React.Component{
       kv[0] = kv[0].trim();
       kv[1] = kv[1].trim();
       this.props.add(kv[0], kv[1]);
+      this.refs.kv_input.value = ''
     }else{
       this.setState({message : 'Invalid key/value pair'});
     }
