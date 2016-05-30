@@ -1,4 +1,5 @@
 import React from 'react';
+import model from './model'
 
 class header extends React.Component{
   constructor(props) {
@@ -23,6 +24,7 @@ class header extends React.Component{
       kv[1] = kv[1].trim();
       this.props.add(kv[0], kv[1]);
       this.refs.kv_input.value = ''
+      model.add(kv[0], kv[1]);
     }else{
       this.setState({message : 'Invalid key/value pair'});
     }

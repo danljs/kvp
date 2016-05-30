@@ -1,4 +1,4 @@
-export default model = function(){
+export default (function(){
 	var kv_array = [], selected = [];
 	return{
 		add : function(key, value){
@@ -44,4 +44,4 @@ export default model = function(){
 			return kv_array;
 		}
 	};
-}
+}())

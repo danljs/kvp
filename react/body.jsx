@@ -1,10 +1,11 @@
-import React from 'react';
-import model form './model'
+import React from 'react'
+import model from './model'
 
 class body extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
+      model : model,
       kv_array : [], 
       selected : []
     }
@@ -13,7 +14,10 @@ class body extends React.Component{
   componentDidMount(){
   }
   componentWillReceiveProps(nextProps){
-    this.setState({kv_array : [...this.state.kv_array, nextProps.kv]})
+    this.setState({
+      kv_array : [...this.state.kv_array, nextProps.kv],
+      model : model
+    })
   }
   render(){
     var me = this;
@@ -31,7 +35,7 @@ class body extends React.Component{
               me.setState({selected: selected})
             }}>
             {
-              me.state.kv_array.map(function(c,i){
+              me.state.model.getdata().map(function(c,i){
                 return <option key={i} value={i}>{c.key + '=' + c.value}</option>
               })
             }
@@ -40,10 +44,14 @@ class body extends React.Component{
           </div>
           <div className='right-area'>
             <div className='row'><button className='order-value-button' onClick={function(e){
-
+              var model = me.state.model;
+              model.sort_value();
+              me.setState({model:model});
             }}>OrderByValue</button></div>
             <div className='row'><button className='order-key-button' onClick={function(e){
-
+              var model = me.state.model;
+              model.sort_key();
+              me.setState({model:model});
             }}>OrderByKey</button></div>
             <div className='row'><button className='delete-button' onClick={function(e){
 
