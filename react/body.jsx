@@ -40,7 +40,7 @@ class body extends React.Component{
           </div>
           <div className='right-area'>
             <div className='row'><button className='order-value-button' onClick={function(e){
-
+              
             }}>OrderByValue</button></div>
             <div className='row'><button className='order-key-button' onClick={function(e){
 

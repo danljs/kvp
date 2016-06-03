@@ -39,7 +39,7 @@ var model = (function(){
 		    kv_xml += "\n</body>\n</html>\n";
 		    return kv_xml;
 		},
-		data : function(){
+		get_data : function(){
 			return kv_array;
 		}
 	}
@@ -124,7 +124,7 @@ function $(id){return document.getElementById(id)}
 
 	$('save-json').addEventListener('click', function(e){
 	    var x = document.createElement('a');    
-	    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(model.data());
+	    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(model.get_data());
 	    x.style = 'visibility:hidden';
 	    x.download = 'kv.json';
 	    document.body.appendChild(x);
