@@ -52,8 +52,9 @@ button:hover{
 }
 
 #kv-input{
+	box-sizing: border-box;
 	width: 396px;
-	height: 19px;
+	height: 25px;
 	margin-bottom: 10px;
 }
 #kv-input:focus {
@@ -83,8 +84,9 @@ button:hover{
 }
 
 #kv-xml{
-	width: 394px;
-	height: 194px;
+	box-sizing: border-box;
+	width: 400px;
+	height: 200px;
 	display: none;
 	margin-bottom: 10px;
 	resize: none;
@@ -106,7 +108,7 @@ button:hover{
 		float: initial;
 	}
 	#kv-input{
-		width: 89%;
+		width: 90%;
 	}
 	.header .right-area{
 		float: initial;
@@ -130,7 +132,7 @@ button:hover{
 		width: 100%;
 	}
 	#kv-xml{
-		width: 98.5%;
+		width: 100%;
 	}
 	button{
 	    margin-left: 0px;
