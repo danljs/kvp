@@ -4,6 +4,9 @@ export default (function(){
 		add : function(key, value){
 			kv_array.push({key : key,value : value});
 		},
+		add_array : function(array){
+			kv_array = kv_array.concat(array);
+		},
 		set_selected : function(index){
 			selected = index;
 		},
@@ -40,7 +43,7 @@ export default (function(){
 		    kv_xml += "\n</body>\n</html>\n";
 		    return kv_xml;
 		},
-		getdata : function(){
+		get_data : function(){
 			return kv_array;
 		}
 	};

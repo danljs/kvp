@@ -101,7 +101,7 @@ var body = (function (_React$Component) {
     this.state = {
       model: _model2['default'],
       kv_array: [],
-      selected: []
+      toggle_list: true
     };
   }
 
@@ -135,24 +135,32 @@ var body = (function (_React$Component) {
             'div',
             { className: 'left-area' },
             _react2['default'].createElement(
-              'select',
-              { className: 'kv-list', multiple: true, size: '10', onChange: function (e) {
-                  var options = e.target.options;
-                  var selected = [];
-                  for (var i = 0; i < options.length; i++) {
-                    options[i].selected ? selected.push(i) : '';
-                  }
-                  me.setState({ selected: selected });
-                } },
-              me.state.model.getdata().map(function (c, i) {
-                return _react2['default'].createElement(
-                  'option',
-                  { key: i, value: i },
-                  c.key + '=' + c.value
-                );
-              })
+              'div',
+              { hidden: !me.state.toggle_list },
+              _react2['default'].createElement(
+                'select',
+                { className: 'kv-list', multiple: true, size: '10', onChange: function (e) {
+                    var options = e.target.options;
+                    var selected = [];
+                    for (var i = 0; i < options.length; i++) {
+                      options[i].selected ? selected.push(i + '') : '';
+                    }
+                    _model2['default'].set_selected(selected);
+                  } },
+                me.state.model.get_data().map(function (c, i) {
+                  return _react2['default'].createElement(
+                    'option',
+                    { key: i, value: i },
+                    c.key + '=' + c.value
+                  );
+                })
+              )
             ),
-            _react2['default'].createElement('textarea', { readOnly: true, className: 'kv-xml' })
+            _react2['default'].createElement(
+              'div',
+              { hidden: me.state.toggle_list },
+              _react2['default'].createElement('textarea', { readOnly: true, className: 'kv-xml', defaultValue: me.state.model.xml() })
+            )
           ),
           _react2['default'].createElement(
             'div',
@@ -188,25 +196,33 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'delete-button', onClick: function (e) {} },
+                { className: 'delete-button', onClick: function (e) {
+                    var model = me.state.model;
+                    model.remove();
+                    me.setState({ model: model });
+                  } },
                 'Delete'
               )
             ),
             _react2['default'].createElement(
               'div',
-              { className: 'row' },
+              { className: 'row', hidden: !me.state.toggle_list },
               _react2['default'].createElement(
                 'button',
-                { className: 'show-xml', onClick: function (e) {} },
+                { className: 'show-xml', onClick: function (e) {
+                    me.setState({ toggle_list: false });
+                  } },
                 'ShowXML'
               )
             ),
             _react2['default'].createElement(
               'div',
-              { className: 'row' },
+              { className: 'row', hidden: me.state.toggle_list },
               _react2['default'].createElement(
                 'button',
-                { className: 'show-list', onClick: function (e) {} },
+                { className: 'show-list', onClick: function (e) {
+                    me.setState({ toggle_list: true });
+                  } },
                 'ShowList'
               )
             ),
@@ -215,7 +231,35 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'load-json', onClick: function (e) {} },
+                { className: 'load-json', onClick: function (e) {
+                    new Promise(function (resolve, reject) {
+                      var x = document.createElement('INPUT');
+                      x.setAttribute('type', 'file');
+                      document.body.appendChild(x);
+                      x.style = 'visibility:hidden';
+                      x.addEventListener('change', resolve);
+                      x.click();
+                      document.body.removeChild(x);
+                    }).then(function (e) {
+                      return new Promise(function (resolve, reject) {
+                        var file = e.target.files[0];
+                        if (!file) {
+                          return;
+                        }
+                        var reader = new FileReader();
+                        reader.onload = resolve;
+                        reader.readAsText(file);
+                      });
+                    }, function () {
+                      console.log('Something wrong...');
+                    }).then(function (e) {
+                      var model = me.state.model;
+                      model.add_array(JSON.parse(e.target.result));
+                      me.setState({ model: model });
+                    }, function () {
+                      console.log('Something wrong...');
+                    });
+                  } },
                 'LoadData'
               )
             ),
@@ -224,7 +268,15 @@ var body = (function (_React$Component) {
               { className: 'row' },
               _react2['default'].createElement(
                 'button',
-                { className: 'save-json', onClick: function (e) {} },
+                { className: 'save-json', onClick: function (e) {
+                    var x = document.createElement('a');
+                    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(me.state.model.get_data());
+                    x.style = 'visibility:hidden';
+                    x.download = 'kv.json';
+                    document.body.appendChild(x);
+                    x.click();
+                    document.body.removeChild(x);
+                  } },
                 'SaveData'
               )
             )
@@ -383,6 +435,9 @@ exports["default"] = (function () {
 		add: function add(key, value) {
 			kv_array.push({ key: key, value: value });
 		},
+		add_array: function add_array(array) {
+			kv_array = kv_array.concat(array);
+		},
 		set_selected: function set_selected(index) {
 			selected = index;
 		},
@@ -421,7 +476,7 @@ exports["default"] = (function () {
 			kv_xml += "\n</body>\n</html>\n";
 			return kv_xml;
 		},
-		getdata: function getdata() {
+		get_data: function get_data() {
 			return kv_array;
 		}
 	};
