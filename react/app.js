@@ -101,7 +101,7 @@ var body = (function (_React$Component) {
     this.state = {
       model: _model2['default'],
       kv_array: [],
-      toggle_list: true
+      toggle_list: false
     };
   }
 
@@ -136,7 +136,7 @@ var body = (function (_React$Component) {
             { className: 'left-area' },
             _react2['default'].createElement(
               'div',
-              { hidden: !me.state.toggle_list },
+              { hidden: me.state.toggle_list },
               _react2['default'].createElement(
                 'select',
                 { className: 'kv-list', multiple: true, size: '10', onChange: function (e) {
@@ -158,8 +158,8 @@ var body = (function (_React$Component) {
             ),
             _react2['default'].createElement(
               'div',
-              { hidden: me.state.toggle_list },
-              _react2['default'].createElement('textarea', { readOnly: true, className: 'kv-xml', defaultValue: me.state.model.xml() })
+              { hidden: !me.state.toggle_list },
+              _react2['default'].createElement('textarea', { readOnly: true, className: 'kv-xml', defaultValue: '', value: me.state.model.xml() })
             )
           ),
           _react2['default'].createElement(
@@ -206,22 +206,22 @@ var body = (function (_React$Component) {
             ),
             _react2['default'].createElement(
               'div',
-              { className: 'row', hidden: !me.state.toggle_list },
+              { className: 'row', hidden: me.state.toggle_list },
               _react2['default'].createElement(
                 'button',
                 { className: 'show-xml', onClick: function (e) {
-                    me.setState({ toggle_list: false });
+                    me.setState({ toggle_list: true });
                   } },
                 'ShowXML'
               )
             ),
             _react2['default'].createElement(
               'div',
-              { className: 'row', hidden: me.state.toggle_list },
+              { className: 'row', hidden: !me.state.toggle_list },
               _react2['default'].createElement(
                 'button',
                 { className: 'show-list', onClick: function (e) {
-                    me.setState({ toggle_list: true });
+                    me.setState({ toggle_list: false });
                   } },
                 'ShowList'
               )

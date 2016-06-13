@@ -7,7 +7,7 @@ class body extends React.Component{
     this.state = {
       model : model,
       kv_array : [],
-      toggle_list: true
+      toggle_list: false
     }
   }
 
@@ -26,7 +26,7 @@ class body extends React.Component{
         <div className='row label'>Key/Value Pair List</div>
         <div className='row'>
           <div className='left-area'>
-            <div hidden={!me.state.toggle_list}>
+            <div hidden={me.state.toggle_list}>
               <select className='kv-list' multiple={true} size='10' onChange={function(e){
                 var options = e.target.options
                 var selected = []
@@ -42,8 +42,8 @@ class body extends React.Component{
               }
               </select>
             </div>
-            <div hidden={me.state.toggle_list}>
-              <textarea readOnly className='kv-xml' defaultValue={me.state.model.xml()}></textarea>
+            <div hidden={!me.state.toggle_list}>
+              <textarea readOnly className='kv-xml' defaultValue='' value={me.state.model.xml()}></textarea>
             </div>
           </div>
           <div className='right-area'>
@@ -62,11 +62,11 @@ class body extends React.Component{
               model.remove();
               me.setState({model:model});
             }}>Delete</button></div>
-            <div className='row' hidden={!me.state.toggle_list}><button className='show-xml' onClick={function(e){
-              me.setState({toggle_list : false})
-            }}>ShowXML</button></div>
-            <div className='row' hidden={me.state.toggle_list}><button className='show-list' onClick={function(e){
+            <div className='row' hidden={me.state.toggle_list}><button className='show-xml' onClick={function(e){
               me.setState({toggle_list : true})
+            }}>ShowXML</button></div>
+            <div className='row' hidden={!me.state.toggle_list}><button className='show-list' onClick={function(e){
+              me.setState({toggle_list : false})
             }}>ShowList</button></div>
             <div className='row'><button className='load-json' onClick={function(e){
               new Promise(function(resolve, reject){

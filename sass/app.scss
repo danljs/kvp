@@ -55,9 +55,10 @@ button{
 }
 
 #kv-input{
-  width: 396px;
+  width: 400px;
   height: 19px;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 #kv-input:focus {
     background-color: #f293eb;
@@ -75,12 +76,9 @@ button{
 }
 
 #kv-xml{
-  width: 394px;
+  width: 400px;
   height: 194px;
-  // display: none;
   margin-bottom: 10px;
   resize: none;
-}
-#show-list{
-  // display: none;
+  box-sizing: border-box;
 }

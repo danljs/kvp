@@ -6,6 +6,12 @@
 body {
   padding-top: 20px;
 }
+@media all and (max-width:767px) {
+  body {
+    padding: 0px;
+    margin: 0px;
+  }
+}
 button {
   height: 25px;
   padding: 0 30px;
@@ -20,6 +26,13 @@ button {
   background-color: #F48024;
   color: #fff;
 }
+@media all and (max-width:767px) {
+  button {
+    background-color: #5F5F5F;
+    width: 90%;
+    margin: 5px 0px;
+  }
+}
 button:hover {
   opacity: 0.8;
 }
@@ -31,50 +44,83 @@ button:hover {
   border-style: outset;
   padding: 10px 0px 0px 20px;
 }
+@media all and (max-width:767px) {
+  .all {
+    width: 100%;
+    height: auto;
+  }
+}
 .all .header {
   position: relative;
   width: 100%;
 }
-.all .header .left-area {
-  float: left;
-}
+.all .header .left-area,
 .all .header .right-area {
   float: left;
+}
+@media all and (max-width:767px) {
+  .all .header .left-area,
+  .all .header .right-area {
+    float: initial;
+    width: 100%;
+  }
+}
+.all .header .kv-input {
+  width: 400px;
+  height: 24px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+@media all and (max-width:767px) {
+  .all .header .kv-input {
+    width: 90%;
+  }
+}
+.all .header .kv-input:focus {
+  background-color: #f293eb;
+}
+.all .header .message {
+  color: red;
+  height: 25px;
 }
 .all .body {
   margin-top: 10px;
   width: 100%;
 }
-.all .body .left-area {
-  float: left;
+@media all and (max-width:767px) {
+  .all .body {
+    margin-top: 30px;
+  }
+  .all .body .show-list,
+  .all .body .show-xml {
+    background-color: #F48024;
+  }
 }
+.all .body .left-area,
 .all .body .right-area {
   float: left;
 }
-.kv-input {
-  width: 396px;
-  height: 19px;
-  margin-bottom: 10px;
+@media all and (max-width:767px) {
+  .all .body .left-area,
+  .all .body .right-area {
+    float: initial;
+    width: 100%;
+  }
 }
-.kv-input:focus {
-  background-color: #f293eb;
-}
-.message {
-  color: red;
-  height: 25px;
-}
-.kv-list {
+.all .body .kv-list,
+.all .body .kv-xml {
   width: 400px;
   height: 200px;
   margin-bottom: 10px;
 }
-.kv-xml {
-  width: 394px;
-  height: 194px;
-  display: none;
-  margin-bottom: 10px;
-  resize: none;
+@media all and (max-width:767px) {
+  .all .body .kv-list,
+  .all .body .kv-xml {
+    margin: 0px;
+    width: 90%;
+  }
 }
-.show-list {
-  display: none;
+.all .body .kv-xml {
+  resize: none;
+  box-sizing: border-box;
 }

@@ -11,6 +11,10 @@
 
 body{
   padding-top: 20px;
+  @media @xs{
+    padding: 0px;
+    margin: 0px;
+  }
 }
 button{
   height: 25px;
@@ -25,6 +29,11 @@ button{
   margin: 0px 0px 10px 10px;
   background-color: #F48024;
   color: #fff;
+  @media @xs{
+    background-color: #5F5F5F;
+    width: 90%;
+    margin: 5px 0px;
+  }
   &:hover{
     opacity: 0.8;
   }
@@ -37,55 +46,71 @@ button{
   background-color: #E7E9D8;
   border-style: outset;
   padding:10px 0px 0px 20px;
+  @media @xs{
+    width: 100%;
+    height: auto;
+  }
   .header{
     position: relative;
     width: 100%;
-    .left-area{
-      float: left;;
-    }
-    .right-area{
+    .left-area, .right-area{
       float: left;
+      @media @xs{
+        float: initial;
+        width: 100%;  
+      }
+    }
+    .kv-input{
+      width: 400px;
+      height: 24px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      @media @xs{
+        width: 90%;
+      }
+    }
+    .kv-input:focus {
+      background-color: #f293eb;
+    }
+    .message{
+      color: red;
+      height: 25px;
     }
   }
   .body{
     margin-top: 10px;
     width: 100%;
-    .left-area{
-      float: left;
+    @media @xs{
+      margin-top: 30px;
+      .show-list,.show-xml{
+        background-color: #F48024;
+      }
     }
-    .right-area{
+    .left-area, .right-area{
       float: left;
+      @media @xs{
+        float: initial;
+        width: 100%;   
+      }
+    }
+    .kv-list, .kv-xml{
+      width: 400px;
+      height: 200px;
+      margin-bottom: 10px;
+      @media @xs{
+        margin: 0px;
+        width: 90%;    
+      }
+    }
+
+    .kv-xml{
+      resize: none;
+      box-sizing: border-box;
     }
   }
 }
 
-.kv-input{
-  width: 396px;
-  height: 19px;
-  margin-bottom: 10px;
-}
-.kv-input:focus {
-    background-color: #f293eb;
-}
 
-.message{
-  color: red;
-  height: 25px;
-}
 
-.kv-list{
-  width: 400px;
-  height: 200px;
-  margin-bottom: 10px;
-}
 
-.kv-xml{
-  width: 394px;
-  height: 194px;
-  display: none;
-  margin-bottom: 10px;
-  resize: none;
-}
-.show-list{
-  display: none;
-}
+
