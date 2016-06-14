@@ -41,33 +41,4 @@
 </body>
 <!-- <script src="app.js"></script> -->
 <script src="app.v1.js"></script>
-<script type="text/javascript">
-	function load(){
-		console.log('2');
-		return new Promise(function(resolve, reject){
-			console.log('3')
-			resolve();
-		});
-	}
-	console.log('1');
-	load().then(
-		function(){
-			console.log('5');
-			return new Promise(function(resolve, reject){
-				console.log('6')
-				resolve();
-			});
-		},function(){
-
-		}
-	).then(
-		function(){
-			console.log('7')
-		},
-		function(){
-
-		}
-	);
-	console.log('4');
-</script>
 </html>
