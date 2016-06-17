@@ -7,7 +7,7 @@ class body extends React.Component{
     this.state = {
       model : model,
       kv_array : [],
-      toggle_list: false
+      toggle_list: true
     }
   }
 
@@ -21,13 +21,14 @@ class body extends React.Component{
   }
   render(){
     var me = this;
+    var list_show = {display: me.state.toggle_list ? 'block' : 'none'}
+    var xml_show = {display: !me.state.toggle_list ? 'block' : 'none'}
     return (
       <div className='row body'>
         <div className='row label'>Key/Value Pair List</div>
         <div className='row'>
           <div className='left-area'>
-            <div hidden={me.state.toggle_list}>
-              <select className='kv-list' multiple={true} size='10' onChange={function(e){
+              <select style={list_show} className='kv-list' multiple={true} size='10' onChange={function(e){
                 var options = e.target.options
                 var selected = []
                 for(var i = 0 ; i < options.length ; i++){
@@ -41,10 +42,7 @@ class body extends React.Component{
                 })
               }
               </select>
-            </div>
-            <div hidden={!me.state.toggle_list}>
-              <textarea readOnly className='kv-xml' defaultValue='' value={me.state.model.xml()}></textarea>
-            </div>
+              <textarea style={xml_show} readOnly className='kv-xml' defaultValue='' value={me.state.model.xml()}></textarea>
           </div>
           <div className='right-area'>
             <div className='row'><button className='order-value-button' onClick={function(e){
@@ -62,11 +60,11 @@ class body extends React.Component{
               model.remove();
               me.setState({model:model});
             }}>Delete</button></div>
-            <div className='row' hidden={me.state.toggle_list}><button className='show-xml' onClick={function(e){
-              me.setState({toggle_list : true})
-            }}>ShowXML</button></div>
-            <div className='row' hidden={!me.state.toggle_list}><button className='show-list' onClick={function(e){
+            <div className='row' style={list_show}><button className='show-xml' onClick={function(e){
               me.setState({toggle_list : false})
+            }}>ShowXML</button></div>
+            <div className='row' style={xml_show}><button className='show-list' onClick={function(e){
+              me.setState({toggle_list : true})
             }}>ShowList</button></div>
             <div className='row'><button className='load-json' onClick={function(e){
               new Promise(function(resolve, reject){

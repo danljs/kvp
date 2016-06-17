@@ -101,7 +101,7 @@ var body = (function (_React$Component) {
     this.state = {
       model: _model2['default'],
       kv_array: [],
-      toggle_list: false
+      toggle_list: true
     };
   }
 
@@ -120,6 +120,8 @@ var body = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var me = this;
+      var list_show = { display: me.state.toggle_list ? 'block' : 'none' };
+      var xml_show = { display: !me.state.toggle_list ? 'block' : 'none' };
       return _react2['default'].createElement(
         'div',
         { className: 'row body' },
@@ -135,32 +137,24 @@ var body = (function (_React$Component) {
             'div',
             { className: 'left-area' },
             _react2['default'].createElement(
-              'div',
-              { hidden: me.state.toggle_list },
-              _react2['default'].createElement(
-                'select',
-                { className: 'kv-list', multiple: true, size: '10', onChange: function (e) {
-                    var options = e.target.options;
-                    var selected = [];
-                    for (var i = 0; i < options.length; i++) {
-                      options[i].selected ? selected.push(i + '') : '';
-                    }
-                    _model2['default'].set_selected(selected);
-                  } },
-                me.state.model.get_data().map(function (c, i) {
-                  return _react2['default'].createElement(
-                    'option',
-                    { key: i, value: i },
-                    c.key + '=' + c.value
-                  );
-                })
-              )
+              'select',
+              { style: list_show, className: 'kv-list', multiple: true, size: '10', onChange: function (e) {
+                  var options = e.target.options;
+                  var selected = [];
+                  for (var i = 0; i < options.length; i++) {
+                    options[i].selected ? selected.push(i + '') : '';
+                  }
+                  _model2['default'].set_selected(selected);
+                } },
+              me.state.model.get_data().map(function (c, i) {
+                return _react2['default'].createElement(
+                  'option',
+                  { key: i, value: i },
+                  c.key + '=' + c.value
+                );
+              })
             ),
-            _react2['default'].createElement(
-              'div',
-              { hidden: !me.state.toggle_list },
-              _react2['default'].createElement('textarea', { readOnly: true, className: 'kv-xml', defaultValue: '', value: me.state.model.xml() })
-            )
+            _react2['default'].createElement('textarea', { style: xml_show, readOnly: true, className: 'kv-xml', defaultValue: '', value: me.state.model.xml() })
           ),
           _react2['default'].createElement(
             'div',
@@ -206,22 +200,22 @@ var body = (function (_React$Component) {
             ),
             _react2['default'].createElement(
               'div',
-              { className: 'row', hidden: me.state.toggle_list },
+              { className: 'row', style: list_show },
               _react2['default'].createElement(
                 'button',
                 { className: 'show-xml', onClick: function (e) {
-                    me.setState({ toggle_list: true });
+                    me.setState({ toggle_list: false });
                   } },
                 'ShowXML'
               )
             ),
             _react2['default'].createElement(
               'div',
-              { className: 'row', hidden: !me.state.toggle_list },
+              { className: 'row', style: xml_show },
               _react2['default'].createElement(
                 'button',
                 { className: 'show-list', onClick: function (e) {
-                    me.setState({ toggle_list: false });
+                    me.setState({ toggle_list: true });
                   } },
                 'ShowList'
               )
