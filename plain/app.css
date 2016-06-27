@@ -44,13 +44,6 @@ button:hover{
 	width: 100%;
 }
 
-.header .left-area{
-	float: left;;
-}
-.header .right-area{
-	float: left;
-}
-
 #kv-input{
 	box-sizing: border-box;
 	width: 396px;
@@ -70,10 +63,8 @@ button:hover{
 	margin-top: 10px;
 	width: 100%;
 }
-.body .left-area{
-	float: left;
-}
-.body .right-area{
+
+.header .left-area, .header .right-area, .body .left-area, .body .right-area{
 	float: left;
 }
 
@@ -100,38 +91,21 @@ button:hover{
 		margin: 0px 0px 0px 0px;
 	}
 	.all{
-		width: 100%;
+		width: 90%;
 		margin: auto; 
 		height: auto;
+		padding:6px 20px 0px 16px;
 	}
-	.header .left-area{
-		float: initial;
+	.all hr{
+		margin: 0;
 	}
-	#kv-input{
-		width: 90%;
-	}
-	.header .right-area{
-		float: initial;
-		width: 90%;
-	}
-	.body{
+	.all .body{
 		margin-top: 30px;
 	}
-	.body .left-area{
+	.header .left-area, .header .right-area, .body .left-area, .body .right-area{
 		float: initial;
-		width: 90%;
 	}
-	.body .right-area{
-		float: initial;
-		width: 90%;
-	}
-	.right-area button{
-		width: 100%;
-	}
-	#kv-list{
-		width: 100%;
-	}
-	#kv-xml{
+	#kv-input, .right-area button, #kv-list, #kv-xml{
 		width: 100%;
 	}
 	button{
@@ -139,7 +113,7 @@ button:hover{
 	    background-color: #5F5F5F;
 	    color: #fff;
 	}
-	#show-list,#show-xml{
+	#show-list, #show-xml{
 		background-color: #F48024;
 	}
 }
