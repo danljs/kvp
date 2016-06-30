@@ -1,3 +1,20 @@
+var storage_firebase = (function (){
+  var config = {
+    apiKey: "AIzaSyDHuh3SVr5Bokp17PBVDd0vh1xWS3ZHJAI",
+    authDomain: "my-firebase-test-80eb9.firebaseapp.com",
+    databaseURL: "https://my-firebase-test-80eb9.firebaseio.com",
+    storageBucket: "my-firebase-test-80eb9.appspot.com",
+  };
+  firebase.initializeApp(config);
+  firebase.database().ref('/groups/techpioneers').once('value').then(function(snapshot){
+    console.log(snapshot.val());
+  });
+}());
+
+var storage = (function (){
+  
+}());
+
 var model = (function(){
 	var kv_array = [], selected = -1;
 	return{
