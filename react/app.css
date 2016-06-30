@@ -29,7 +29,7 @@ button {
 @media all and (max-width:767px) {
   button {
     background-color: #5F5F5F;
-    width: 90%;
+    width: 100%;
     margin: 5px 0px;
   }
 }
@@ -46,8 +46,9 @@ button:hover {
 }
 @media all and (max-width:767px) {
   .all {
-    width: 100%;
+    width: 90%;
     height: auto;
+    padding: 6px 20px 0px 16px;
   }
 }
 .all .header {
@@ -73,7 +74,7 @@ button:hover {
 }
 @media all and (max-width:767px) {
   .all .header .kv-input {
-    width: 90%;
+    width: 100%;
   }
 }
 .all .header .kv-input:focus {
@@ -117,7 +118,7 @@ button:hover {
   .all .body .kv-list,
   .all .body .kv-xml {
     margin: 0px;
-    width: 90%;
+    width: 100%;
   }
 }
 .all .body .kv-xml {

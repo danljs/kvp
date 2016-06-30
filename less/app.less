@@ -3,6 +3,10 @@
 @s: ~"all and (max-width:991px) and (min-width:768px)";
 @m: ~"all and (max-width:1199px) and (min-width:992px)";
 @l: ~"all and (min-width:1200px)";
+@i-4-4s: ~"all and (min-device-width:320px) and (max-device-width:480px) and (-webkit-min-device-pixel-ratio:2)";
+@i-5-5s: ~"all and (min-device-width:320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio:2)";
+@i-6: ~"all and (min-device-width:375px) and (max-device-width:667px) and (-webkit-min-device-pixel-ratio:2)";
+@i-6p: ~"all and (min-device-width:414px) and (max-device-width:736px) and (-webkit-min-device-pixel-ratio:3)";
 .row:after{
     content: "";
     display: table;
@@ -31,7 +35,7 @@ button{
   color: #fff;
   @media @xs{
     background-color: #5F5F5F;
-    width: 90%;
+    width: 100%;
     margin: 5px 0px;
   }
   &:hover{
@@ -47,8 +51,9 @@ button{
   border-style: outset;
   padding:10px 0px 0px 20px;
   @media @xs{
-    width: 100%;
+    width: 90%;
     height: auto;
+    padding:6px 20px 0px 16px;
   }
   .header{
     position: relative;
@@ -66,7 +71,7 @@ button{
       margin-bottom: 10px;
       box-sizing: border-box;
       @media @xs{
-        width: 90%;
+        width: 100%;
       }
     }
     .kv-input:focus {
@@ -99,7 +104,7 @@ button{
       margin-bottom: 10px;
       @media @xs{
         margin: 0px;
-        width: 90%;    
+        width: 100%;    
       }
     }
 
