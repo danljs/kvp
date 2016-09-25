@@ -78,12 +78,12 @@ button:hover{
 	box-sizing: border-box;
 	width: 400px;
 	height: 200px;
-	display: none;
+	/*display: none;*/
 	margin-bottom: 10px;
 	resize: none;
 }
 #show-list{
-	display: none;
+	/*display: none;*/
 }
 @media (max-width: 600px) {
 	body{
