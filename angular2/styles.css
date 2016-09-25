@@ -1,13 +1,119 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 350%;
-}
-body {
-  margin: 2em;
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
 }
 
- /*
-  * See https://github.com/angular/angular.io/blob/master/public/docs/_examples/styles.css
-  * for the full set of master styles used by the documentation samples
-  */
+body{
+	padding-top: 20px;
+}
+button{
+	display: inline-block;
+    height: 25px;
+    padding: 0 30px;
+    color: #555;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: #F48024;
+    color: #fff;
+}
+button:hover{
+	opacity: 0.8;
+}
+.all{
+	width: 600px;
+	height: 330px;
+    margin: auto; 
+    background-color: #E7E9D8;
+    border-style: outset;
+    padding:10px 0px 0px 20px;
+}
+.header{
+	position: relative;
+	width: 100%;
+}
+
+#kv-input{
+	box-sizing: border-box;
+	width: 396px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+#kv-input:focus {
+    background-color: #f293eb;
+}
+
+#message{
+	color: red;
+	height: 25px;
+}
+
+.body{
+	margin-top: 10px;
+	width: 100%;
+}
+
+.header .left-area, .header .right-area, .body .left-area, .body .right-area{
+	float: left;
+}
+
+#kv-list{
+	width: 400px;
+	height: 200px;
+	margin-bottom: 10px;
+}
+
+#kv-xml{
+	box-sizing: border-box;
+	width: 400px;
+	height: 200px;
+	display: none;
+	margin-bottom: 10px;
+	resize: none;
+}
+#show-list{
+	display: none;
+}
+@media (max-width: 600px) {
+	body{
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+	}
+	.all{
+		width: 90%;
+		margin: auto; 
+		height: auto;
+		padding:6px 20px 0px 16px;
+	}
+	.all hr{
+		margin: 0;
+	}
+	.all .body{
+		margin-top: 30px;
+	}
+	.header .left-area, .header .right-area, .body .left-area, .body .right-area{
+		float: initial;
+	}
+	#kv-input, .right-area button, #kv-list, #kv-xml{
+		width: 100%;
+	}
+	button{
+	    margin-left: 0px;
+	    background-color: #5F5F5F;
+	    color: #fff;
+	}
+	#show-list, #show-xml{
+		background-color: #F48024;
+	}
+}
