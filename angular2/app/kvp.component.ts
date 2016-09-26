@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { KvpService } from './kvp.service';
 
 export class KvPair {
   key: string
@@ -39,9 +40,10 @@ export class KvPair {
 			</div>
 		</div>
 	</div>
-  `
+  `,
+  providers: [KvpService],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	selectedKv: KvPair
 
 	selectedIndex = -1
@@ -50,6 +52,12 @@ export class AppComponent {
 	kvs = []
 	newKv = ''
 	toggle_list = true
+
+	constructor(private kvpService: KvpService) { }
+
+	ngOnInit(): void {
+	   this.kvpService.getKvps();
+	}
 
 	onSelect(kv: KvPair, index): void {
 	  this.selectedKv = kv
