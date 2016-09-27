@@ -99,7 +99,7 @@ export class AppComponent implements OnInit {
 		kv_xml += "<select id='kv-list' size='10'>\n";
 		this.kvs.map(function(c, i){
       kv_xml += "<option value='" + c.key + "'" ;
-	    // kv_xml += selected === i ? " selected" : "" ;
+	    kv_xml += this.selectedIndex === i ? " selected" : "" ;
 	    kv_xml += ">" + c.key + '=' + c.value + "</option>\n";
 		});
     kv_xml += "</select>";
