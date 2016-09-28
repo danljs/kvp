@@ -69,9 +69,8 @@ export class AppComponent implements OnInit {
 	onAdd(): void {
 		let patt0 = /\w+\s*=\s*\w+/g
 		let patt1 = /(^[a-zA-Z0-9\s*]*$)/g
-		let kv = this.newKv
-		if(patt0.test(kv) && patt1.test(kv.replace('=', ''))){
-			kv = kv.split('=')
+		if(patt0.test(this.newKv) && patt1.test(this.newKv.replace('=', ''))){
+			let kv = this.newKv.split('=')
 			kv[0] = kv[0].trim()
 			kv[1] = kv[1].trim()
 			this.kvs.push({key: kv[0], value: kv[1]});
@@ -118,14 +117,14 @@ export class AppComponent implements OnInit {
 			let x = document.createElement('INPUT')
 		    x.setAttribute('type', 'file')
 		    document.body.appendChild(x)
-		    x.style = 'visibility:hidden'
+		    x.style['visibility'] = 'hidden';
 		    x.addEventListener('change', resolve)
 		    x.click()
 		    document.body.removeChild(x)
 		})
 		.then(
 			e => new Promise((resolve, reject) => {
-		    let file = e.target.files[0];
+		    let file = e['target'].files[0];
 				if(!file){return;}
 				let reader = new FileReader();
 				reader.onload = resolve;
@@ -135,17 +134,17 @@ export class AppComponent implements OnInit {
 		)
 		.then(
 			e => {
-				this.kvs = this.kvs.concat(JSON.parse(e.target.result))
+				this.kvs = this.kvs.concat(JSON.parse(e['target'].result))
 			},
 			() => console.log('Something wrong...')
 		)
 	}
 
 	save_json(): void {
-		let x = document.createElement('a');    
-    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.kvs);
-    x.style = 'visibility:hidden';
-    x.download = 'kv.json';
+		let x = document.createElement('a')
+    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.kvs)
+    x.style['visibility'] = 'hidden'
+    x['download'] = 'kv.json';
     document.body.appendChild(x);
     x.click();
     document.body.removeChild(x);
