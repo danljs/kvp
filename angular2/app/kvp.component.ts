@@ -24,7 +24,7 @@ export class KvPair {
 			<div class="row">
 				<div class="left-area">
 					<select id="kv-list" size="10" *ngIf="toggle_list">
-						<option *ngFor="let kv of kvs; let i = index" (click)="onSelect(kv,i)">{{kv.key}}={{kv.value}}</option>
+						<option *ngFor="let kv of kvpService.getKvps(); let i = index" (click)="onSelect(kv,i)">{{kv.key}}={{kv.value}}</option>
 					</select>
 					<textarea readOnly id="kv-xml" *ngIf="!toggle_list">{{kv_xml}}</textarea>
 				</div>
@@ -49,7 +49,6 @@ export class AppComponent implements OnInit {
 	selectedIndex = -1
 	message = ''
 	kv_xml = ''
-	kvs = []
 	newKv = ''
 	toggle_list = true
 
@@ -73,7 +72,7 @@ export class AppComponent implements OnInit {
 			let kv = this.newKv.split('=')
 			kv[0] = kv[0].trim()
 			kv[1] = kv[1].trim()
-			this.kvs.push({key: kv[0], value: kv[1]});
+			this.kvpService.addKvp({key: kv[0], value: kv[1]});
 			this.newKv = '';
 		}else{
 			this.message = 'Invalid key/value pair';
@@ -81,22 +80,21 @@ export class AppComponent implements OnInit {
 	}
 
 	delete(): void {
-		this.kvs.splice(this.selectedIndex, 1)
+		this.kvpService.delete(this.selectedIndex)
 	}
 
 	order_value(): void {
-		this.kvs.sort((a, b) => a.key < b.key ? -1 : (a.key > b.key ? 1 : 0))
+		this.kvpService.order_value()
 	}
 	order_key(): void {
-		this.kvs.sort((a, b) => a.value < b.value ? -1 : (a.value > b.value ? 1 : 0))
+		this.kvpService.order_key()
 	}
 
 	show_xml(): void {
-		
 		var kv_xml = "<!DOCTYPE html>\n";
 		kv_xml += "<html>\n<body>\n";
 		kv_xml += "<select id='kv-list' size='10'>\n";
-		this.kvs.map(function(c, i){
+		this.kvpService.getKvps().map((c, i) => {
       kv_xml += "<option value='" + c.key + "'" ;
 	    kv_xml += this.selectedIndex === i ? " selected" : "" ;
 	    kv_xml += ">" + c.key + '=' + c.value + "</option>\n";
@@ -134,7 +132,7 @@ export class AppComponent implements OnInit {
 		)
 		.then(
 			e => {
-				this.kvs = this.kvs.concat(JSON.parse(e['target'].result))
+				this.kvpService.concatKvps(JSON.parse(e['target'].result))
 			},
 			() => console.log('Something wrong...')
 		)
@@ -142,7 +140,7 @@ export class AppComponent implements OnInit {
 
 	save_json(): void {
 		let x = document.createElement('a')
-    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.kvs)
+    x.href = 'data:text/json;charset=utf-8,' + JSON.stringify(this.kvpService.getKvps())
     x.style['visibility'] = 'hidden'
     x['download'] = 'kv.json';
     document.body.appendChild(x);
