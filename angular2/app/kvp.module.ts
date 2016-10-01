@@ -2,11 +2,11 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 
-import { AppComponent }   from './kvp.component';
+import { KvpComponent }   from './kvp.component';
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent ],
-  bootstrap:    [ AppComponent ]
+  declarations: [ KvpComponent ],
+  bootstrap:    [ KvpComponent ]
 })
 export class AppModule {
 

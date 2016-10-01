@@ -43,7 +43,7 @@ export class KvPair {
   `,
   providers: [KvpService],
 })
-export class AppComponent implements OnInit {
+export class KvpComponent implements OnInit {
 	selectedKv: KvPair
 
 	selectedIndex = -1
