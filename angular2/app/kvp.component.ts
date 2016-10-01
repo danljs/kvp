@@ -24,7 +24,7 @@ export class KvPair {
 			<div class="row">
 				<div class="left-area">
 					<select id="kv-list" size="10" *ngIf="toggle_list">
-						<option *ngFor="let kv of kvpService.getKvps(); let i = index" (click)="onSelect(kv,i)">{{kv.key}}={{kv.value}}</option>
+						<option *ngFor="let kv of kvs; let i = index" (click)="onSelect(kv,i)">{{kv.key}}={{kv.value}}</option>
 					</select>
 					<textarea readOnly id="kv-xml" *ngIf="!toggle_list">{{kv_xml}}</textarea>
 				</div>
@@ -51,13 +51,16 @@ export class AppComponent implements OnInit {
 	kv_xml = ''
 	newKv = ''
 	toggle_list = true
+	kvs = []
 
 	constructor(private kvpService: KvpService) { }
 
 	ngOnInit(): void {
-	   this.kvpService.getKvps();
+	   this.getKvs()
 	}
-
+	getKvs(): void {
+		this.kvpService.getKvps().then(kvs => this.kvs = kvs)
+	}
 	onSelect(kv: KvPair, index): void {
 	  this.selectedKv = kv
 	  this.selectedIndex = index
@@ -94,7 +97,7 @@ export class AppComponent implements OnInit {
 		var kv_xml = "<!DOCTYPE html>\n";
 		kv_xml += "<html>\n<body>\n";
 		kv_xml += "<select id='kv-list' size='10'>\n";
-		this.kvpService.getKvps().map((c, i) => {
+		this.kvs.map((c, i) => {
       kv_xml += "<option value='" + c.key + "'" ;
 	    kv_xml += this.selectedIndex === i ? " selected" : "" ;
 	    kv_xml += ">" + c.key + '=' + c.value + "</option>\n";
@@ -111,31 +114,7 @@ export class AppComponent implements OnInit {
 	}
 
 	load_json(): void {
-		new Promise((resolve, reject) => {
-			let x = document.createElement('INPUT')
-		    x.setAttribute('type', 'file')
-		    document.body.appendChild(x)
-		    x.style['visibility'] = 'hidden';
-		    x.addEventListener('change', resolve)
-		    x.click()
-		    document.body.removeChild(x)
-		})
-		.then(
-			e => new Promise((resolve, reject) => {
-		    let file = e['target'].files[0];
-				if(!file){return;}
-				let reader = new FileReader();
-				reader.onload = resolve;
-				reader.readAsText(file);
-			}),
-    	() => console.log('Something wrong...')
-		)
-		.then(
-			e => {
-				this.kvpService.concatKvps(JSON.parse(e['target'].result))
-			},
-			() => console.log('Something wrong...')
-		)
+		this.kvpService.load_json().then(() => this.getKvs())
 	}
 
 	save_json(): void {
