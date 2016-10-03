@@ -33,7 +33,7 @@ button:hover{
 }
 .all{
 	width: 600px;
-	height: 330px;
+	height: 360px;
     margin: auto; 
     background-color: #E7E9D8;
     border-style: outset;
@@ -70,14 +70,14 @@ button:hover{
 
 #kv-list{
 	width: 400px;
-	height: 200px;
+	height: 235px;
 	margin-bottom: 10px;
 }
 
 #kv-xml{
 	box-sizing: border-box;
 	width: 400px;
-	height: 200px;
+	height: 235px;
 	/*display: none;*/
 	margin-bottom: 10px;
 	resize: none;

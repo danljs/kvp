@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { KvpService } from './kvp.service';
 
 export class KvPair {
@@ -36,6 +38,7 @@ export class KvPair {
 					<div class="row"><button id="show-list" *ngIf="!toggle_list" (click)="show_list()">ShowList</button></div>
 					<div class="row"><button id="load-json" (click)="load_json()">LoadData</button></div>
 					<div class="row"><button id="save-json" (click)="save_json()">SaveData</button></div>
+					<div class="row"><button id="show-detail" (click)="show_detail()">ShowDetail</button></div>
 				</div>
 			</div>
 		</div>
@@ -53,7 +56,7 @@ export class KvpComponent implements OnInit {
 	toggle_list = true
 	kvs = []
 
-	constructor(private kvpService: KvpService) { }
+	constructor(private kvpService: KvpService, private router: Router) { }
 
 	ngOnInit(): void {
 	   this.getKvs()
@@ -125,5 +128,9 @@ export class KvpComponent implements OnInit {
     document.body.appendChild(x);
     x.click();
     document.body.removeChild(x);
-	};
+	}
+	
+	show_detail(): void {
+    this.router.navigate(['/kvp.detail']);
+  }
 }
