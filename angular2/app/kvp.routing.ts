@@ -6,17 +6,16 @@ import { KvpComponent } from './kvp.component';
 
 const kvpRoutes: Routes = [
 	{
-    path: '/',
+    path: '',
     component: KvpComponent
   },
   {
     path: 'kvp',
     component: KvpComponent
   },
-  // ,
-  // {
-  //   path: 'kvp.detail',
-  //   component: KvpDetailComponent
-  // }
+  {
+    path: 'kvp.detail',
+    component: KvpDetailComponent
+  }
 ];
 export const routing: ModuleWithProviders = RouterModule.forRoot(kvpRoutes);

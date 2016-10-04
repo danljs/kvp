@@ -43,6 +43,7 @@ export class KvPair {
 			</div>
 		</div>
 	</div>
+	<router-outlet></router-outlet>
   `,
   providers: [KvpService],
 })
@@ -129,7 +130,7 @@ export class KvpComponent implements OnInit {
     x.click();
     document.body.removeChild(x);
 	}
-	
+
 	show_detail(): void {
     this.router.navigate(['/kvp.detail']);
   }
