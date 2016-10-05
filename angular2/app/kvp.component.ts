@@ -9,43 +9,9 @@ export class KvPair {
 }
 
 @Component({
+	moduleId: module.id,
   selector: 'kvp-app',
-  template: `
-  <div class="all">
-		<div class="header">
-			<div class="label">Key/Value Pair</div>
-			<div class="row">
-				<div class="left-area"><input id="kv-input" type="text" [(ngModel)]="newKv" (keypress)="onEnter($event)"/></div>
-				<div class="right-area"><button id="add-button" (click)="onAdd(newKv)">Add</button></div>
-			</div>
-			<div class="row" id="message">{{message}}</div>
-		</div>
-		<hr>
-		<div class="body">
-			<div class="row label">Key/Value Pair List</div>
-			<div class="row">
-				<div class="left-area">
-					<select id="kv-list" size="10" *ngIf="toggle_list">
-						<option *ngFor="let kv of kvs; let i = index" (click)="onSelect(kv,i)">{{kv.key}}={{kv.value}}</option>
-					</select>
-					<textarea readOnly id="kv-xml" *ngIf="!toggle_list">{{kv_xml}}</textarea>
-				</div>
-				<div class="right-area">
-					<div class="row"><button id="order-value-button" (click)="order_value()">OrderByValue</button></div>
-					<div class="row"><button id="order-key-button" (click)="order_key()">OrderByKey</button></div>
-					<div class="row"><button id="delete-button" (click)="delete()">Delete</button></div>
-					<div class="row"><button id="show-xml" *ngIf="toggle_list" (click)="show_xml()">ShowXML</button></div>
-					<div class="row"><button id="show-list" *ngIf="!toggle_list" (click)="show_list()">ShowList</button></div>
-					<div class="row"><button id="load-json" (click)="load_json()">LoadData</button></div>
-					<div class="row"><button id="save-json" (click)="save_json()">SaveData</button></div>
-					<div class="row"><button id="show-detail" (click)="show_detail()">ShowDetail</button></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<router-outlet></router-outlet>
-  `,
-  providers: [KvpService],
+  templateUrl: 'kvp.component.html',
 })
 export class KvpComponent implements OnInit {
 	selectedKv: KvPair
@@ -113,7 +79,7 @@ export class KvpComponent implements OnInit {
 		this.toggle_list = false 
 	}
 
-	show_list(): void {
+	show_list = (): void => {
 		this.toggle_list = true 
 	}
 

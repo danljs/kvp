@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
+	moduleId: module.id,
   selector: 'kvp.detail',
-  template: `
-  	<div class="detail">
-		<h1>{{title}}</h1>	
-		<button (click)="goBack()">Back</button>
-	</div>
-  `,
+  templateUrl: 'kvp.detail.component.html',
 })
 export class KvpDetailComponent {
 	title = 'detail of detail';
