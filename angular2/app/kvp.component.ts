@@ -23,7 +23,10 @@ export class KvpComponent implements OnInit {
 	toggle_list = true
 	kvs = []
 
-	constructor(private kvpService: KvpService, private router: Router) { }
+	constructor(
+		private kvpService: KvpService, 
+		private router: Router
+	) { }
 
 	ngOnInit(): void {
 	   this.getKvs()

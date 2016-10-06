@@ -15,7 +15,7 @@ import { routing } from './kvp.routing';
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing],
   declarations: [ AppComponent, KvpComponent, KvpDetailComponent],
-  providers: 		[ KvpService, ],
+  providers: 	[ KvpService, ],
   bootstrap:    [ AppComponent ],
 })
 export class AppModule {
