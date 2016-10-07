@@ -1,9 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+
 import { KvPair } from './kvp.component';
 
 @Injectable()
 export class KvpService {
 	kvs = []
+	private headers = new Headers({'Content-Type': 'application/json'});
+  private kvpUrl = 'http://localhost:1234/users';  // URL to web api
+
+	constructor(private http: Http) { }
+
+	private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
+
+	getUsers(): Promise<KvPair> {
+    return this.http.get(this.kvpUrl)
+               .toPromise()
+               .then(response => {
+               		console.log(response)
+               		console.log(response.json())
+               		return response.json().data as KvPair
+               	})
+               .catch(this.handleError);
+  }
+
   getKvps(): Promise<KvPair[]>{
     return Promise.resolve(this.kvs);
   }

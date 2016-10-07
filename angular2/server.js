@@ -16,7 +16,7 @@ module.exports = (() => {
 
   app.get('/users', (req, res) => {
     console.log(req.query)
-    res.send(JSON.stringify({ a: 1 }));
+    res.send(JSON.stringify({ data: {key:'kkk',value:'vvv'} }));
   })
   
   let port = process.env.PORT || 1234
