@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { KvpService } from './kvp.service';
@@ -13,7 +13,7 @@ export class KvPair {
   selector: 'kvp-app',
   templateUrl: 'kvp.component.html',
 })
-export class KvpComponent implements OnInit {
+export class KvpComponent implements OnInit, AfterViewChecked, AfterViewInit {
 	selectedKv: KvPair
 
 	selectedIndex = -1
@@ -31,6 +31,13 @@ export class KvpComponent implements OnInit {
 	ngOnInit(): void {
 	   this.getKvs()
 	}
+	ngAfterViewInit(): void{
+		console.log('ngAfterViewInit')
+	}
+	ngAfterViewChecked() {
+		//console.log('ngAfterViewChecked')
+	}
+
 	getKvs(): void {
 		this.kvpService.getKvps().then(kvs => this.kvs = kvs)
 	}
@@ -44,6 +51,7 @@ export class KvpComponent implements OnInit {
 	onAdd(): void {
 		let patt0 = /\w+\s*=\s*\w+/g
 		let patt1 = /(^[a-zA-Z0-9\s*]*$)/g
+		this.message = ''
 		if(patt0.test(this.newKv) && patt1.test(this.newKv.replace('=', ''))){
 			let kv = this.newKv.split('=')
 			kv[0] = kv[0].trim()
