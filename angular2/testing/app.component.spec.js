@@ -9,12 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var testing_1 = require('@angular/core/testing');
+var platform_browser_1 = require('@angular/platform-browser');
 var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
 var app_component_1 = require('../app/app.component');
 //import { BannerComponent }           from './banner.component';
-//import { RouterLinkStubDirective }   from '../testing';
-//import { RouterOutletStubComponent } from '../testing';
+var router_stubs_1 = require('./router-stubs');
 var WelcomeStubComponent = (function () {
     function WelcomeStubComponent() {
     }
@@ -31,6 +31,8 @@ describe('AppComponent & TestModule', function () {
         testing_1.TestBed.configureTestingModule({
             declarations: [
                 app_component_1.AppComponent,
+                //BannerComponent, WelcomeStubComponent,
+                router_stubs_1.RouterLinkStubDirective, router_stubs_1.RouterOutletStubComponent
             ]
         })
             .compileComponents()
@@ -45,7 +47,7 @@ describe('AppComponent & TestModule', function () {
 describe('AppComponent & NO_ERRORS_SCHEMA', function () {
     beforeEach(testing_1.async(function () {
         testing_1.TestBed.configureTestingModule({
-            declarations: [app_component_1.AppComponent,],
+            declarations: [app_component_1.AppComponent, router_stubs_1.RouterLinkStubDirective],
             schemas: [core_1.NO_ERRORS_SCHEMA]
         })
             .compileComponents()
@@ -71,7 +73,7 @@ describe('AppComponent & AppModule', function () {
                 imports: [kvp_routing_1.routing]
             },
             add: {
-                declarations: []
+                declarations: [router_stubs_1.RouterLinkStubDirective, router_stubs_1.RouterOutletStubComponent]
             }
         })
             .compileComponents()
@@ -89,28 +91,28 @@ function tests() {
         // trigger initial data binding
         fixture.detectChanges();
         // find DebugElements with an attached RouterLinkStubDirective
-        // linkDes = fixture.debugElement
-        //   .queryAll(By.directive(RouterLinkStubDirective));
+        linkDes = fixture.debugElement
+            .queryAll(platform_browser_1.By.directive(router_stubs_1.RouterLinkStubDirective));
         // get the attached link directive instances using the DebugElement injectors
-        // links = linkDes
-        //   .map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
+        links = linkDes
+            .map(function (de) { return de.injector.get(router_stubs_1.RouterLinkStubDirective); });
     });
     it('can instantiate it', function () {
         expect(comp).not.toBeNull();
     });
-    it('can get RouterLinks from template', function () {
-        expect(links.length).toBe(3, 'should have 3 links');
-        expect(links[0].linkParams).toBe('/dashboard', '1st link should go to Dashboard');
-        expect(links[1].linkParams).toBe('/heroes', '1st link should go to Heroes');
-    });
-    it('can click Heroes link in template', function () {
-        var heroesLinkDe = linkDes[1];
-        var heroesLink = links[1];
-        expect(heroesLink.navigatedTo).toBeNull('link should not have navigated yet');
-        heroesLinkDe.triggerEventHandler('click', null);
-        fixture.detectChanges();
-        expect(heroesLink.navigatedTo).toBe('/heroes');
-    });
+    // it('can get RouterLinks from template', () => {
+    //   expect(links.length).toBe(3, 'should have 3 links');
+    //   expect(links[0].linkParams).toBe('/dashboard', '1st link should go to Dashboard');
+    //   expect(links[1].linkParams).toBe('/heroes', '1st link should go to Heroes');
+    // });
+    // it('can click Heroes link in template', () => {
+    //   const heroesLinkDe = linkDes[1];
+    //   const heroesLink = links[1];
+    //   expect(heroesLink.navigatedTo).toBeNull('link should not have navigated yet');
+    //   heroesLinkDe.triggerEventHandler('click', null);
+    //   fixture.detectChanges();
+    //   expect(heroesLink.navigatedTo).toBe('/heroes');
+    // });
 }
 /*
 Copyright 2016 Google Inc. All Rights Reserved.
