@@ -15,6 +15,7 @@ var core_2 = require('@angular/core');
 var app_component_1 = require('../app/app.component');
 //import { BannerComponent }           from './banner.component';
 var router_stubs_1 = require('./router-stubs');
+var app_highlight_directive_1 = require('../app/app.highlight.directive');
 var WelcomeStubComponent = (function () {
     function WelcomeStubComponent() {
     }
@@ -114,9 +115,18 @@ function tests() {
     //   expect(heroesLink.navigatedTo).toBe('/heroes');
     // });
 }
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/ 
+describe('AppComponent (highlightDirective)', function () {
+    beforeEach(function () {
+        fixture = testing_1.TestBed.configureTestingModule({
+            declarations: [app_component_1.AppComponent, app_highlight_directive_1.HighlightDirective],
+            schemas: [core_1.NO_ERRORS_SCHEMA]
+        })
+            .createComponent(app_component_1.AppComponent);
+        fixture.detectChanges(); // initial binding
+    });
+    it('should have skyblue <h2>', function () {
+        var de = fixture.debugElement.query(platform_browser_1.By.css('h2'));
+        expect(de.styles['backgroundColor']).toBe('skyblue');
+    });
+});
 //# sourceMappingURL=app.component.spec.js.map

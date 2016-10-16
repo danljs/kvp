@@ -10,11 +10,13 @@ import { AppComponent }   from './app.component';
 import { KvpComponent }   from './kvp.component';
 import { KvpDetailComponent }   from './kvp.detail.component';
 import { KvpService}			from './kvp.service';
+import { HighlightDirective } from './app.highlight.directive';
 
 import { routing } from './kvp.routing';
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing],
-  declarations: [ AppComponent, KvpComponent, KvpDetailComponent],
+  exports:      [ HighlightDirective ],
+  declarations: [ AppComponent, KvpComponent, KvpDetailComponent,HighlightDirective],
   providers: 	[ KvpService, ],
   bootstrap:    [ AppComponent ],
 })

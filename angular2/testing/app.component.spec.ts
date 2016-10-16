@@ -3,14 +3,15 @@ import { async, ComponentFixture, TestBed} from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-  import { NO_ERRORS_SCHEMA }          from '@angular/core';
-  import { Component }                 from '@angular/core';
-  import { AppComponent }              from '../app/app.component';
-  //import { BannerComponent }           from './banner.component';
-  import { RouterLinkStubDirective, RouterOutletStubComponent } from './router-stubs';
+import { NO_ERRORS_SCHEMA }          from '@angular/core';
+import { Component }                 from '@angular/core';
+import { AppComponent }              from '../app/app.component';
+//import { BannerComponent }           from './banner.component';
+import { RouterLinkStubDirective, RouterOutletStubComponent } from './router-stubs';
+import { HighlightDirective } from '../app/app.highlight.directive';
 
-  @Component({selector: 'app-welcome', template: ''})
-  class WelcomeStubComponent {}
+@Component({selector: 'app-welcome', template: ''})
+class WelcomeStubComponent {}
 
 
 let comp:    AppComponent;
@@ -128,9 +129,18 @@ function tests() {
   // });
 }
 
+describe('AppComponent (highlightDirective)', () => {
+  beforeEach(() => {
+    fixture = TestBed.configureTestingModule({
+      declarations: [ AppComponent, HighlightDirective],
+      schemas:      [ NO_ERRORS_SCHEMA ]
+    })
+    .createComponent(AppComponent);
+    fixture.detectChanges(); // initial binding
+  });
 
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
+  it('should have skyblue <h2>', () => {
+    const de = fixture.debugElement.query(By.css('h2'));
+    expect(de.styles['backgroundColor']).toBe('skyblue');
+  });
+});
