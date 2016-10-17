@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { KvpService } from './kvp.service';
+import { KvpService } from '../service/kvp.service';
 
 @Component({
 	moduleId: module.id,

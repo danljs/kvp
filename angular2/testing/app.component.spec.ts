@@ -5,10 +5,10 @@ import { By } from '@angular/platform-browser';
 
 import { NO_ERRORS_SCHEMA }          from '@angular/core';
 import { Component }                 from '@angular/core';
-import { AppComponent }              from '../app/app.component';
+import { AppComponent }              from '../app/component/app.component';
 //import { BannerComponent }           from './banner.component';
 import { RouterLinkStubDirective, RouterOutletStubComponent } from './router-stubs';
-import { HighlightDirective } from '../app/app.highlight.directive';
+import { HighlightDirective } from '../app/directive/app.highlight.directive';
 
 @Component({selector: 'app-welcome', template: ''})
 class WelcomeStubComponent {}
@@ -56,8 +56,8 @@ describe('AppComponent & NO_ERRORS_SCHEMA', () => {
 //////// Testing w/ real root module //////
 // Tricky because we are disabling the router and its configuration
 // Better to use RouterTestingModule
-import { AppModule }    from '../app/kvp.module';
-import { routing } from '../app/kvp.routing';
+import { AppModule }    from '../app/module/kvp.module';
+import { routing } from '../app/routing/kvp.routing';
 
 describe('AppComponent & AppModule', () => {
 

@@ -1,8 +1,8 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { KvpDetailComponent } from './kvp.detail.component';
-import { KvpComponent } from './kvp.component';
+import { KvpDetailComponent } from '../component/kvp.detail.component';
+import { KvpComponent } from '../component/kvp.component';
 
 const kvpRoutes: Routes = [
 	{

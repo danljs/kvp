@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { KvpService } from './kvp.service';
+import { KvpService } from '../service/kvp.service';
 
 export class KvPair {
   key: string

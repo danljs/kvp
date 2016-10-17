@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { KvPair } from './kvp.component';
+import { KvPair } from '../component/kvp.component';
 
 @Injectable()
 export class KvpService {
