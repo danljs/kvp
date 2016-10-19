@@ -11,6 +11,9 @@ module.exports = (() => {
   })
 
   app.get('/', (req, res) => {
+    // for(let i = 0 ; i < 100000000 ; i++){
+    //   console.log("haha");
+    // }
     res.send('Hello!')
   })
 

@@ -12,10 +12,10 @@ var testing_1 = require('@angular/core/testing');
 var platform_browser_1 = require('@angular/platform-browser');
 var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
-var app_component_1 = require('../app/component/app.component');
+var app_component_1 = require('../../app/component/app.component');
 //import { BannerComponent }           from './banner.component';
-var router_stubs_1 = require('./router-stubs');
-var app_highlight_directive_1 = require('../app/directive/app.highlight.directive');
+var router_stubs_1 = require('../routing/router-stubs');
+var app_highlight_directive_1 = require('../../app/directive/app.highlight.directive');
 var WelcomeStubComponent = (function () {
     function WelcomeStubComponent() {
     }
@@ -62,8 +62,8 @@ describe('AppComponent & NO_ERRORS_SCHEMA', function () {
 //////// Testing w/ real root module //////
 // Tricky because we are disabling the router and its configuration
 // Better to use RouterTestingModule
-var kvp_module_1 = require('../app/module/kvp.module');
-var kvp_routing_1 = require('../app/routing/kvp.routing');
+var kvp_module_1 = require('../../app/module/kvp.module');
+var kvp_routing_1 = require('../../app/routing/kvp.routing');
 describe('AppComponent & AppModule', function () {
     beforeEach(testing_1.async(function () {
         testing_1.TestBed.configureTestingModule({
