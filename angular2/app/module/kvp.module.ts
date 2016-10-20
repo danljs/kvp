@@ -10,6 +10,7 @@ import { AppComponent }   from '../component/app.component';
 import { KvpComponent }   from '../component/kvp.component';
 import { KvpDetailComponent }   from '../component/kvp.detail.component';
 import { KvpService}			from '../service/kvp.service';
+import { KvpHttpService}			from '../service/kvp.http.service';
 import { HighlightDirective } from '../directive/app.highlight.directive';
 
 import { routing } from '../routing/kvp.routing';
@@ -17,7 +18,7 @@ import { routing } from '../routing/kvp.routing';
   imports:      [ BrowserModule, FormsModule, HttpModule, routing],
   exports:      [ HighlightDirective ],
   declarations: [ AppComponent, KvpComponent, KvpDetailComponent,HighlightDirective],
-  providers: 	[ KvpService, ],
+  providers: 	[ KvpService, KvpHttpService ],
   bootstrap:    [ AppComponent ],
 })
 export class AppModule {

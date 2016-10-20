@@ -18,6 +18,7 @@ var app_component_1 = require('../component/app.component');
 var kvp_component_1 = require('../component/kvp.component');
 var kvp_detail_component_1 = require('../component/kvp.detail.component');
 var kvp_service_1 = require('../service/kvp.service');
+var kvp_http_service_1 = require('../service/kvp.http.service');
 var app_highlight_directive_1 = require('../directive/app.highlight.directive');
 var kvp_routing_1 = require('../routing/kvp.routing');
 var AppModule = (function () {
@@ -28,7 +29,7 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, kvp_routing_1.routing],
             exports: [app_highlight_directive_1.HighlightDirective],
             declarations: [app_component_1.AppComponent, kvp_component_1.KvpComponent, kvp_detail_component_1.KvpDetailComponent, app_highlight_directive_1.HighlightDirective],
-            providers: [kvp_service_1.KvpService,],
+            providers: [kvp_service_1.KvpService, kvp_http_service_1.KvpHttpService],
             bootstrap: [app_component_1.AppComponent],
         }), 
         __metadata('design:paramtypes', [])

@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var router_1 = require('@angular/router');
-var kvp_service_1 = require('../service/kvp.service');
+var kvp_http_service_1 = require('../service/kvp.http.service');
 var KvpDetailComponent = (function () {
-    function KvpDetailComponent(kvpService, location, router) {
-        this.kvpService = kvpService;
+    function KvpDetailComponent(kvpHttpService, location, router) {
+        this.kvpHttpService = kvpHttpService;
         this.location = location;
         this.router = router;
         this.title = 'detail of detail';
@@ -28,7 +28,7 @@ var KvpDetailComponent = (function () {
     };
     KvpDetailComponent.prototype.getUsers = function () {
         var _this = this;
-        this.kvpService.getUsers().then(function (kv) {
+        this.kvpHttpService.getUsers().then(function (kv) {
             _this.key = kv[0].key + kv[1].key;
         });
     };
@@ -38,7 +38,7 @@ var KvpDetailComponent = (function () {
             selector: 'kvp.detail',
             templateUrl: 'kvp.detail.component.html',
         }), 
-        __metadata('design:paramtypes', [kvp_service_1.KvpService, common_1.Location, router_1.Router])
+        __metadata('design:paramtypes', [kvp_http_service_1.KvpHttpService, common_1.Location, router_1.Router])
     ], KvpDetailComponent);
     return KvpDetailComponent;
 }());

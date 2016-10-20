@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { KvpService } from '../service/kvp.service';
+import { KvpHttpService } from '../service/kvp.http.service';
 
 @Component({
 	moduleId: module.id,
@@ -13,7 +13,7 @@ export class KvpDetailComponent {
 	title = 'detail of detail';
 	key = '';
 	constructor(
-		private kvpService: KvpService, 
+		private kvpHttpService: KvpHttpService, 
 		private location: Location,
 		private router: Router) {}
 	goBack(): void {
@@ -23,7 +23,7 @@ export class KvpDetailComponent {
     this.router.navigate(['/kvp']);
   }
   getUsers(): void {
-  	this.kvpService.getUsers().then(kv => {
+  	this.kvpHttpService.getUsers().then(kv => {
   		this.key = kv[0].key + kv[1].key
   	});
   }

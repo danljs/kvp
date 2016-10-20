@@ -9,34 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
 var KvpService = (function () {
-    function KvpService(http) {
-        this.http = http;
+    function KvpService() {
         this.kvs = [];
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.kvpUrl = 'http://localhost:1234/users'; // URL to web api
     }
-    KvpService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    };
-    KvpService.prototype.extractData = function (res) {
-        console.log(res);
-        console.log(res.json());
-        if (res.status < 200 || res.status >= 300) {
-            throw new Error('Bad response status: ' + res.status);
-        }
-        return res.json().data || {};
-    };
-    KvpService.prototype.getUsers = function () {
-        var _this = this;
-        return this.http.get(this.kvpUrl)
-            .toPromise()
-            .then(function (response) { return _this.extractData(response); })
-            .catch(this.handleError);
-    };
     KvpService.prototype.getKvps = function () {
         return Promise.resolve(this.kvs);
     };
@@ -82,7 +59,7 @@ var KvpService = (function () {
     };
     KvpService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [])
     ], KvpService);
     return KvpService;
 }());
