@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { KvPair } from '../component/kvp.component';
@@ -17,14 +17,19 @@ export class KvpService {
     return Promise.reject(error.message || error);
   }
 
-	getUsers(): Promise<KvPair> {
+  private extractData(res: Response) {
+  	console.log(res)
+    console.log(res.json())
+    if (res.status < 200 || res.status >= 300) {
+      throw new Error('Bad response status: ' + res.status);
+    }
+    return res.json().data || { };
+  }
+
+	getUsers(): Promise<KvPair[]> {
     return this.http.get(this.kvpUrl)
                .toPromise()
-               .then(response => {
-               		console.log(response)
-               		console.log(response.json())
-               		return response.json().data as KvPair
-               	})
+               .then(response => this.extractData(response) as KvPair[])
                .catch(this.handleError);
   }
 

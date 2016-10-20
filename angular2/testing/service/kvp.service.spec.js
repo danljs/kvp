@@ -9,10 +9,10 @@ require('rxjs/add/operator/do');
 require('rxjs/add/operator/toPromise');
 var kvp_service_1 = require('../../app/service/kvp.service');
 var makeKvpData = function () { return [
-    { id: 1, name: 'Windstorm' },
-    { id: 2, name: 'Bombasto' },
-    { id: 3, name: 'Magneta' },
-    { id: 4, name: 'Tornado' }
+    { key: '1', value: 'Windstorm' },
+    { key: '2', value: 'Bombasto' },
+    { key: '3', value: 'Magneta' },
+    { key: '4', value: 'Tornado' }
 ]; };
 ////////  Tests  /////////////
 describe('Kvp-KvpService (mockBackend)', function () {
@@ -37,7 +37,7 @@ describe('Kvp-KvpService (mockBackend)', function () {
     it('can provide the mockBackend as XHRBackend', testing_1.inject([http_1.XHRBackend], function (backend) {
         expect(backend).not.toBeNull('backend should be provided');
     }));
-    describe('when getKvps', function () {
+    describe('when getUsers', function () {
         var backend;
         var service;
         var fakeKvps;
@@ -51,31 +51,31 @@ describe('Kvp-KvpService (mockBackend)', function () {
         }));
         it('should have expected fake Kvps (then)', testing_1.async(testing_1.inject([], function () {
             backend.connections.subscribe(function (c) { return c.mockRespond(response); });
-            service.getKvps()
-                .then(function (kvps) {
-                expect(kvps.length).toBe(fakeKvps.length, 'should have expected no. of kvps');
+            service.getUsers()
+                .then(function (users) {
+                expect(users.length).toBe(fakeKvps.length, 'should have expected no. of users');
             });
         })));
         it('should have expected fake kvps (Observable.do)', testing_1.async(testing_1.inject([], function () {
             backend.connections.subscribe(function (c) { return c.mockRespond(response); });
-            service.getKvps().then(function (kvps) {
-                expect(kvps.length).toBe(fakeKvps.length, 'should have expected no. of kvps');
+            service.getUsers().then(function (users) {
+                expect(users.length).toBe(fakeKvps.length, 'should have expected no. of users');
             });
         })));
-        it('should be OK returning no kvps', testing_1.async(testing_1.inject([], function () {
+        it('should be OK returning no users', testing_1.async(testing_1.inject([], function () {
             var resp = new http_1.Response(new http_1.ResponseOptions({ status: 200, body: { data: [] } }));
             backend.connections.subscribe(function (c) { return c.mockRespond(resp); });
-            service.getKvps()
-                .then(function (kvps) {
-                expect(kvps.length).toBe(0, 'should have no kvps');
+            service.getUsers()
+                .then(function (users) {
+                expect(users.length).toBe(0, 'should have no users');
             });
         })));
         it('should treat 404 as an Observable error', testing_1.async(testing_1.inject([], function () {
             var resp = new http_1.Response(new http_1.ResponseOptions({ status: 404 }));
             backend.connections.subscribe(function (c) { return c.mockRespond(resp); });
-            service.getKvps()
-                .then(function (kvps) {
-                fail('should not respond with kvps');
+            service.getUsers()
+                .then(function (users) {
+                fail('should not respond with users');
             })
                 .catch(function (err) {
                 expect(err).toMatch(/Bad response status/, 'should catch bad response status code');

@@ -22,14 +22,19 @@ var KvpService = (function () {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     };
+    KvpService.prototype.extractData = function (res) {
+        console.log(res);
+        console.log(res.json());
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        return res.json().data || {};
+    };
     KvpService.prototype.getUsers = function () {
+        var _this = this;
         return this.http.get(this.kvpUrl)
             .toPromise()
-            .then(function (response) {
-            console.log(response);
-            console.log(response.json());
-            return response.json().data;
-        })
+            .then(function (response) { return _this.extractData(response); })
             .catch(this.handleError);
     };
     KvpService.prototype.getKvps = function () {

@@ -19,7 +19,6 @@ var KvpDetailComponent = (function () {
         this.router = router;
         this.title = 'detail of detail';
         this.key = '';
-        this.value = '';
     }
     KvpDetailComponent.prototype.goBack = function () {
         this.location.back();
@@ -30,8 +29,7 @@ var KvpDetailComponent = (function () {
     KvpDetailComponent.prototype.getUsers = function () {
         var _this = this;
         this.kvpService.getUsers().then(function (kv) {
-            _this.key = kv.key;
-            _this.value = kv.value;
+            _this.key = kv[0].key + kv[1].key;
         });
     };
     KvpDetailComponent = __decorate([

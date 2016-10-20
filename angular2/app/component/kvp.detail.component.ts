@@ -12,7 +12,6 @@ import { KvpService } from '../service/kvp.service';
 export class KvpDetailComponent {
 	title = 'detail of detail';
 	key = '';
-	value = '';
 	constructor(
 		private kvpService: KvpService, 
 		private location: Location,
@@ -25,8 +24,7 @@ export class KvpDetailComponent {
   }
   getUsers(): void {
   	this.kvpService.getUsers().then(kv => {
-  		this.key = kv.key
-  		this.value = kv.value
+  		this.key = kv[0].key + kv[1].key
   	});
   }
 }

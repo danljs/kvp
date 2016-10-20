@@ -13,10 +13,10 @@ import { KvPair as Kvp} from '../../app/component/kvp.component';
 import { KvpService } from '../../app/service/kvp.service';
 
 const makeKvpData = () => [
-  { id: 1, name: 'Windstorm' },
-  { id: 2, name: 'Bombasto' },
-  { id: 3, name: 'Magneta' },
-  { id: 4, name: 'Tornado' }
+  { key: '1', value: 'Windstorm' },
+  { key: '2', value: 'Bombasto' },
+  { key: '3', value: 'Magneta' },
+  { key: '4', value: 'Tornado' }
 ] as Kvp[];
 
 ////////  Tests  /////////////
@@ -52,7 +52,7 @@ describe('Kvp-KvpService (mockBackend)', () => {
       expect(backend).not.toBeNull('backend should be provided');
   }));
 
-  describe('when getKvps', () => {
+  describe('when getUsers', () => {
       let backend: MockBackend;
       let service: KvpService;
       let fakeKvps: Kvp[];
@@ -69,30 +69,30 @@ describe('Kvp-KvpService (mockBackend)', () => {
       it('should have expected fake Kvps (then)', async(inject([], () => {
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
 
-        service.getKvps()
-          .then(kvps => {
-            expect(kvps.length).toBe(fakeKvps.length,
-              'should have expected no. of kvps');
+        service.getUsers()
+          .then(users => {
+            expect(users.length).toBe(fakeKvps.length,
+              'should have expected no. of users');
           });
       })));
 
       it('should have expected fake kvps (Observable.do)', async(inject([], () => {
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
 
-        service.getKvps().then(kvps => {
-            expect(kvps.length).toBe(fakeKvps.length,
-              'should have expected no. of kvps');
+        service.getUsers().then(users => {
+            expect(users.length).toBe(fakeKvps.length,
+              'should have expected no. of users');
           });
       })));
 
 
-      it('should be OK returning no kvps', async(inject([], () => {
+      it('should be OK returning no users', async(inject([], () => {
         let resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-        service.getKvps()
-          .then(kvps => {
-            expect(kvps.length).toBe(0, 'should have no kvps');
+        service.getUsers()
+          .then(users => {
+            expect(users.length).toBe(0, 'should have no users');
           });
       })));
 
@@ -100,9 +100,9 @@ describe('Kvp-KvpService (mockBackend)', () => {
         let resp = new Response(new ResponseOptions({status: 404}));
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-        service.getKvps()
-          .then(kvps => {
-            fail('should not respond with kvps');
+        service.getUsers()
+          .then(users => {
+            fail('should not respond with users');
           })
           .catch(err => {
             expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
