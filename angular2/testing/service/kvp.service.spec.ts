@@ -27,29 +27,23 @@ describe('Kvp-KvpService (mockBackend)', () => {
       expect(service instanceof KvpService).toBe(true);
   }));
   
-  // describe('when addKvp', () => {
-  //     let backend: MockBackend;
-  //     let service: KvpHttpService;
-  //     let fakeKvps: Kvp[];
-  //     let response: Response;
+  describe('when addKvp', () => {
+      let service: KvpService;
 
-  //     beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-  //       backend = be;
-  //       service = new KvpHttpService(http);
-  //       fakeKvps = makeKvpData();
-  //       let options = new ResponseOptions({status: 200, body: {data: fakeKvps}});
-  //       response = new Response(options);
-  //     }));
+      beforeEach(inject([], () => {
+        service = new KvpService();
+      }));
 
-  //     it('should have expected fake Kvps (then)', async(inject([], () => {
-  //       backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+      it('should have expected fake Kvps ', async(inject([], () => {
+        service.getKvps().then(users => {
+          expect(users.length).toBe(0,'should not have any users');
+          service.addKvp({key: 'key', value: 'value'});
+        })
+        
+        service.getKvps().then(users => {
+          expect(users.length).toBe(1, 'should have expected 1 user');
+        });
+      })));
 
-  //       service.getUsers()
-  //         .then(users => {
-  //           expect(users.length).toBe(fakeKvps.length,
-  //             'should have expected no. of users');
-  //         });
-  //     })));
-
-  // });
+  });
 });
