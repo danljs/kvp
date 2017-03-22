@@ -12,12 +12,13 @@ import { KvpDetailComponent }   from './component/kvp.detail.component';
 import { KvpService}      from './service/kvp.service';
 import { KvpHttpService}      from './service/kvp.http.service';
 import { HighlightDirective } from './directive/app.highlight.directive';
+import { TreeViewComponent }   from './component/treeview.component';
 
 import { routing } from './routing/kvp.routing';
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing],
   exports:      [ HighlightDirective ],
-  declarations: [ AppComponent, KvpComponent, KvpDetailComponent,HighlightDirective],
+  declarations: [ AppComponent, KvpComponent, KvpDetailComponent,HighlightDirective,TreeViewComponent],
   providers:   [ KvpService, KvpHttpService ],
   bootstrap:    [ AppComponent ]
 })
